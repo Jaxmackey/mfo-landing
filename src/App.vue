@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <div class="collapse bg-dark" id="navbarHeader">
+      <!-- <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
           <div class="row">
             <div class="col-sm-8 col-md-7 py-4">
@@ -10,16 +10,21 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
-            <img src="assets/images/thumb_342757_news_xxxl.png">
+            <img src="./assets/images/thumb_342757_news_xxxl.png">
             <strong style="padding-left: 3px;">Займ ОНЛАЙН</strong>
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <v-btn
+            color="#ffc75b"
+          >
+            Оформить
+          </v-btn>
+          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
+          </button> -->
         </div>
       </div>
     </header>
@@ -40,19 +45,19 @@
           <div class="advantages-wrapper">
             <div class="advantages-item">
               <div class="advantages-icon">
-                <img src="assets/images/fast-time.svg" alt="">
+                <img src="./assets/images/fast-time.svg" alt="">
               </div>
               <div class="advantages-text">Быстрый займ</div>
             </div>
             <div class="advantages-item">
               <div class="advantages-icon">
-                <img src="assets/images/protection.svg" alt="">
+                <img src="./assets/images/protection.svg" alt="">
               </div>
               <div class="advantages-text">Надежная защита</div>
             </div>
             <div class="advantages-item">
               <div class="advantages-icon">
-                <img src="assets/images/handshake.svg" alt="">
+                <img src="./assets/images/handshake.svg" alt="">
               </div>
               <div class="advantages-text">Ответственный кредитор</div>
             </div>
@@ -63,9 +68,9 @@
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="items">
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-photo">
-                <img src="assets/images/denginadom.png" alt="">
+                <img src="./assets/images/denginadom.png" alt="">
               </div>
               <div class="item-wrapper">
                 <div class="item-title">Информация о продукте:</div>
@@ -84,13 +89,46 @@
                   <li>Срок займа: до 52 недель.</li>
                 </ul>
               </div>
+            </div> -->
+            <div class="item" v-for="(item, i1) in items" :key="i1">
+              <div class="item-photo">
+                <img :src="'./assets/images/mfo-logos/' + item.NameImageLogo + '.png'" alt="">
+              </div>
+              <div class="item-wrapper">
+                <div class="item-title" v-if="item.Title">{{ item.Title }}</div>
+                <div class="item-description" v-if="item.CompanyDescription">{{ item.CompanyDescription }}</div>
+                <div v-if="item.InfoProduct">
+                  <div class="item-list-title">Информация о продукте:</div>
+                  <ul class="item-list">
+                    <li v-for="(info, i2) in item.InfoProduct" :key="i2">{{ info }}</li>
+                  </ul>
+                </div>
+                <div v-if="item.SposobiGeta">
+                  <div class="item-list-title">Способы оплаты:</div>
+                  <ul class="item-list">
+                    <li v-for="(sposob, i3) in item.SposobiGeta" :key="i3">{{ sposob }}</li>
+                  </ul>
+                </div>
+                <div v-if="item.ReqZaemshik">
+                  <div class="item-list-title">Обязательно:</div>
+                  <ul class="item-list">
+                    <li v-for="(req, i4) in item.ReqZaemshik" :key="i4">{{ req }}</li>
+                  </ul>
+                </div>
+                <div v-if="item.SposobiPogas">
+                  <div class="item-list-title">Способы погашения:</div>
+                  <ul class="item-list">
+                    <li v-for="(pogas, i5) in item.SposobiPogas" :key="i5">{{ pogas }}</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </main>
 
-    <footer class="text-muted">
+    <!-- <footer class="text-muted">
       <div class="container">
         <p class="float-right">
           <a href="#">Back to top</a>
@@ -98,18 +136,78 @@
         <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
         <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
 <script>
+import dataItems from './data'
 
 export default {
-  name: 'App'
+  name: 'App',
+  data: () => {
+    return {
+      items: dataItems
+    }
+  }
 }
 </script>
 
 <style>
+  /* temp styles */
+  .navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+  }
+  .bg-dark {
+    background-color: #343a40!important;
+  }
+  .shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .navbar-dark .navbar-brand {
+    color: #fff;
+  }
+  .bg-light {
+    background-color: #f8f9fa!important;
+  }
+  .py-5 {
+    padding: 3rem 0;
+  }
+  .container.d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  /* /temp styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .container {
+    width: 1140px;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
   body {
     font-family: "Montserrat", sans-serif;
   }
@@ -121,7 +219,7 @@ export default {
   h1 {
     text-align: left;
     font-weight: 700;
-    font-style: 42px;
+    font-size: 42px;
     margin-bottom: 25px;
   }
 
@@ -213,7 +311,7 @@ export default {
 
   .item {
     border: 1px solid #ededed;
-    box-shadow: 0;
+    box-shadow: none;
     transition: 0.3s;
     background: #fff;
     width: calc(33.33% - 10px);
