@@ -17,11 +17,45 @@
             <img src="./assets/images/thumb_342757_news_xxxl.png">
             <strong style="padding-left: 3px;">Займ ОНЛАЙН</strong>
           </a>
-          <v-btn
-            color="#ffc75b"
+          <v-dialog
+            v-model="dialog"
+            persistent
+            max-width="290"
           >
-            Оформить
-          </v-btn>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="primary"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
+                Open Dialog
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="headline">
+                Use Google's location service?
+              </v-card-title>
+              <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="green darken-1"
+                  text
+                  @click="dialog = false"
+                >
+                  Disagree
+                </v-btn>
+                <v-btn
+                  color="green darken-1"
+                  text
+                  @click="dialog = false"
+                >
+                  Agree
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button> -->
@@ -92,7 +126,7 @@
             </div> -->
             <div class="item" v-for="(item, i1) in items" :key="i1">
               <div class="item-photo">
-                <img :src="'./assets/images/mfo-logos/' + item.NameImageLogo + '.png'" alt="">
+                <img :src="getImgUrl(item.NameImageLogo)" alt="">
               </div>
               <div class="item-wrapper">
                 <div class="item-title" v-if="item.Title">{{ item.Title }}</div>
@@ -147,7 +181,13 @@ export default {
   name: 'App',
   data: () => {
     return {
-      items: dataItems
+      items: dataItems,
+      dialog: true
+    }
+  },
+  methods: {
+    getImgUrl (pic) {
+      return require(`./assets/images/mfo-logos/${pic}.png`)
     }
   }
 }
