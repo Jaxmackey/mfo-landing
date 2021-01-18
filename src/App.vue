@@ -196,7 +196,7 @@
                 </ul>
               </div>
             </div> -->
-            <div class="item" @click="addChooseItems(item)" v-for="(item, i1) in items" :key="i1">
+            <div class="item" @click="setChooseItems(item)" v-for="(item, i1) in items" :key="i1">
               <div class="item-photo">
                 <img :src="getImgUrl(item.NameImageLogo)" alt="">
               </div>
@@ -263,7 +263,7 @@ export default {
     getImgUrl (pic) {
       return require(`./assets/images/mfo-logos/${pic}.png`)
     },
-    addChooseItems (item) {
+    setChooseItems (item) {
       if (this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)) {
         const delItem = this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)
         this.chooseItems.splice(this.chooseItems.indexOf(delItem), 1)
