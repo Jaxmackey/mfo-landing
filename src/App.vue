@@ -1,16 +1,6 @@
 <template>
   <v-app id="app">
     <header>
-      <!-- <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">О нас</h4>
-              <p class="text-muted">Занимаемся выдачей микрозаймов более 10 лет.</p>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
@@ -24,11 +14,11 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                color="primary"
-                dark
+                class="butt butt--fixed"
                 v-bind="attrs"
                 v-on="on"
                 v-if="orderBtn"
+                color="#00cc1b"
               >
                 Oформить заявку
               </v-btn>
@@ -128,9 +118,6 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button> -->
         </div>
       </div>
     </header>
@@ -174,28 +161,6 @@
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="items">
-            <!-- <div class="item">
-              <div class="item-photo">
-                <img src="./assets/images/denginadom.png" alt="">
-              </div>
-              <div class="item-wrapper">
-                <div class="item-title">Информация о продукте:</div>
-                <ul class="item-list">
-                  <li>Сумма займа: от 5 000 до 100 000 рублей.</li>
-                  <li>Срок займа: до 52 недель.</li>
-                  <li>Мгновенное перечисление денег сразу после одобрени</li>
-                  <li>Срок займа: до 52 недель.</li>
-                  <li>Мгновенное перечисление денег сразу после одобрени</li>
-                  <li>Срок займа: до 52 недель.</li>
-                  <li>Мгновенное перечисление денег сразу после одобрени</li>
-                  <li>Срок займа: до 52 недель.</li>
-                  <li>Мгновенное перечисление денег сразу после одобрени</li>
-                  <li>Срок займа: до 52 недель.</li>
-                  <li>Мгновенное перечисление денег сразу после одобрени</li>
-                  <li>Срок займа: до 52 недель.</li>
-                </ul>
-              </div>
-            </div> -->
             <div class="item" @click="setChooseItems(item)" v-for="(item, i1) in items" :key="i1">
               <div class="item-photo">
                 <img :src="getImgUrl(item.NameImageLogo)" alt="">
@@ -203,25 +168,25 @@
               <div class="item-wrapper">
                 <div class="item-title" v-if="item.Title">{{ item.Title }}</div>
                 <div class="item-description" v-if="item.CompanyDescription">{{ item.CompanyDescription }}</div>
-                <div v-if="item.InfoProduct">
+                <div v-if="item.InfoProduct.length > 0">
                   <div class="item-list-title">Информация о продукте:</div>
                   <ul class="item-list">
                     <li v-for="(info, i2) in item.InfoProduct" :key="i2">{{ info }}</li>
                   </ul>
                 </div>
-                <div v-if="item.SposobiGeta">
+                <div v-if="item.SposobiGeta.length > 0">
                   <div class="item-list-title">Способы оплаты:</div>
                   <ul class="item-list">
                     <li v-for="(sposob, i3) in item.SposobiGeta" :key="i3">{{ sposob }}</li>
                   </ul>
                 </div>
-                <div v-if="item.ReqZaemshik">
+                <div v-if="item.ReqZaemshik.length > 0">
                   <div class="item-list-title">Обязательно:</div>
                   <ul class="item-list">
                     <li v-for="(req, i4) in item.ReqZaemshik" :key="i4">{{ req }}</li>
                   </ul>
                 </div>
-                <div v-if="item.SposobiPogas">
+                <div v-if="item.SposobiPogas.length > 0">
                   <div class="item-list-title">Способы погашения:</div>
                   <ul class="item-list">
                     <li v-for="(pogas, i5) in item.SposobiPogas" :key="i5">{{ pogas }}</li>
@@ -233,16 +198,6 @@
         </div>
       </div>
     </main>
-
-    <!-- <footer class="text-muted">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-      </div>
-    </footer> -->
   </v-app>
 </template>
 
@@ -256,7 +211,7 @@ export default {
       items: dataItems,
       dialog: false,
       chooseItems: [],
-      orderBtn: false
+      orderBtn: true
     }
   },
   methods: {
@@ -276,7 +231,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   /* temp styles */
   .navbar {
     position: relative;
@@ -344,6 +299,9 @@ export default {
     font-weight: 700;
     font-size: 42px;
     margin-bottom: 25px;
+    @media(max-width: 767px) {
+      font-size: 32px;
+    }
   }
 
   h2 {
@@ -376,6 +334,7 @@ export default {
 
   .banner .container .butt {
     margin-top: 25px;
+    color: #ffffff;
   }
 
   .butt {
@@ -392,6 +351,25 @@ export default {
     text-decoration: none;
     text-transform: uppercase;
     border-radius: 4px;
+
+    &--fixed {
+      right: 20px;
+      bottom: 20px;
+      position: fixed !important;
+      border-radius: 0 !important;
+      height: 56px !important;
+      color: #ffffff !important;
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      background-color: #00cc1b !important;
+      z-index: 9999;
+      @media(max-width: 1264px) {
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
   }
 
   .item-photo {
@@ -430,6 +408,9 @@ export default {
     flex-wrap: wrap;
     justify-content: space-between;
     cursor: pointer;
+    @media(max-width: 991px) {
+      padding-bottom: 40px;
+    }
   }
 
   .item {
@@ -438,8 +419,14 @@ export default {
     transition: 0.3s;
     background: #fff;
     width: calc(33.33% - 10px);
-    margin: 5px 0;
+    margin: 10px 0;
     padding-bottom: 25px;
+    @media(max-width: 1264px) {
+      width: calc(50% - 10px);
+    }
+    @media(max-width: 767px) {
+      width: 100%;
+    }
   }
 
   .item:hover {
@@ -457,15 +444,21 @@ export default {
   .item-title {
     padding: 0 30px 5px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 24px;
+    line-height: 26px;
+    color: #b47a06;
   }
 
   .item-list {
-    padding: 15px 30px;
+    padding: 5px 30px !important;
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    margin-bottom: 0;
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .item-wrapper::-webkit-scrollbar {
@@ -486,6 +479,7 @@ export default {
   .item-list li {
     margin: 5px 0;
     font-size: 16px;
+    line-height: 20px;
     padding-left: 25px;
     position: relative;
   }
@@ -507,6 +501,10 @@ export default {
     align-items: center;
     flex-wrap: wrap;
     padding: 80px 0;
+    @media(max-width: 767px) {
+      justify-content: center;
+      padding: 10px 0;
+    }
   }
 
   .advantages-item {
@@ -515,6 +513,10 @@ export default {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    @media(max-width: 767px) {
+      width: 50%;
+      margin: 10px 0;
+    }
   }
 
   .advantages-icon {
@@ -524,6 +526,10 @@ export default {
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
+    @media(max-width: 767px) {
+      width: 120px;
+      height: 120px;
+    }
   }
 
   .advantages-icon img {
@@ -533,5 +539,20 @@ export default {
   .advantages-text {
     font-weight: 600;
     font-size: 26px;
+    @media(max-width: 991px) {
+      font-size: 18px;
+    }
+  }
+
+  .item-description {
+    color: #797979;
+    padding: 0 30px 10px;
+    font-size: 14px;
+  }
+
+  .item-list-title {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 30px;
   }
 </style>
