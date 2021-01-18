@@ -17,7 +17,7 @@
                 class="butt butt--fixed"
                 v-bind="attrs"
                 v-on="on"
-                v-if="orderBtn"
+                v-show="orderBtn"
                 color="#00cc1b"
               >
                 Oформить заявку
@@ -25,7 +25,7 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">User Profile</span>
+                <span class="headline">Заполните профиль</span>
               </v-card-title>
               <v-card-text>
                 <v-container>
@@ -36,8 +36,9 @@
                       md="4"
                     >
                       <v-text-field
-                        label="Legal first name*"
+                        label="Фамилия"
                         required
+                        v-model="orderInfo.lastName"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -46,8 +47,9 @@
                       md="4"
                     >
                       <v-text-field
-                        label="Legal middle name"
-                        hint="example of helper text only on focus"
+                        label="Имя"
+                        required
+                        v-model="orderInfo.firstName"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -56,48 +58,34 @@
                       md="4"
                     >
                       <v-text-field
-                        label="Legal last name*"
-                        hint="example of persistent helper text"
-                        persistent-hint
+                        label="Отчество"
                         required
+                        v-model="orderInfo.patronymic"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
                         label="Email*"
                         required
+                        v-model="orderInfo.email"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        label="Password*"
-                        type="password"
+                        label="Телефон*"
+                        type="tel"
                         required
+                        v-model="orderInfo.phone"
                       ></v-text-field>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                    >
-                      <v-select
-                        :items="['0-17', '18-29', '30-54', '54+']"
-                        label="Age*"
-                        required
-                      ></v-select>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                    >
-                      <v-autocomplete
-                        :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                        label="Interests"
-                        multiple
-                      ></v-autocomplete>
+                    <v-col cols="12">
+                      <div>Выбранные партнеры:</div>
+                      <ul>
+                        <li v-for="(item, i) in chooseItems" :key="i">{{ item.Title }}</li>
+                      </ul>
                     </v-col>
                   </v-row>
                 </v-container>
-                <small>*indicates required field</small>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -106,14 +94,14 @@
                   text
                   @click="dialog = false"
                 >
-                  Close
+                  Закрыть
                 </v-btn>
                 <v-btn
                   color="blue darken-1"
                   text
                   @click="dialog = false"
                 >
-                  Save
+                  Отправить
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -128,7 +116,7 @@
           <div class="banner-wrapper">
             <h1 class="jumbotron-heading">МГНОВЕННЫЕ ЗАЙМЫ ОНЛАЙН - КРУГЛОСУТОЧНО!</h1>
             <h2>подайте заявку в 3-4 компании для 100% получения денег</h2>
-            <a href="#" class="butt">оформить заявку</a>
+            <a href="#" class="butt" @click="$vuetify.goTo('.album',options)">оформить заявку</a>
           </div>
         </div>
       </section>
@@ -161,7 +149,7 @@
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="items">
-            <div class="item" @click="setChooseItems(item)" v-for="(item, i1) in items" :key="i1">
+            <div class="item" @click="setChooseItems(item, $event)" v-for="(item, i1) in items" :key="i1">
               <div class="item-photo">
                 <img :src="getImgUrl(item.NameImageLogo)" alt="">
               </div>
@@ -203,6 +191,7 @@
 
 <script>
 import dataItems from './data'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -211,21 +200,48 @@ export default {
       items: dataItems,
       dialog: false,
       chooseItems: [],
-      orderBtn: true
+      orderBtn: false,
+      orderInfo: {
+        firstName: null,
+        lastName: null,
+        patronymic: null,
+        email: null,
+        phone: null
+      }
     }
   },
   methods: {
     getImgUrl (pic) {
       return require(`./assets/images/mfo-logos/${pic}.png`)
     },
-    setChooseItems (item) {
+    setChooseItems (item, e) {
+      console.log(e)
       if (this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)) {
         const delItem = this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)
         this.chooseItems.splice(this.chooseItems.indexOf(delItem), 1)
+        e.target.closest('.item').classList.remove('active')
       } else {
         this.chooseItems.push(item)
+        e.target.closest('.item').classList.add('active')
       }
       this.chooseItems.length > 0 ? this.orderBtn = true : this.orderBtn = false
+    },
+    sendOrder () {
+      axios
+        .post('http://www.omdbapi.com/?s=mummy&apikey=XXXXX&page=1&type=movie&Content-Type=application/json', {
+          firstName: this.orderInfo.firstName,
+          lastName: this.orderInfo.lastName,
+          patronymic: this.orderInfo.patronymic,
+          email: this.orderInfo.email,
+          phone: this.orderInfo.phone,
+          chooseItems: this.chooseItems
+        })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
