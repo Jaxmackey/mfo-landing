@@ -25,7 +25,7 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">Заполните профиль</span>
+                <span class="headline">Введите ваши данные</span>
               </v-card-title>
               <v-card-text>
                 <v-container>
@@ -116,7 +116,7 @@
           <div class="banner-wrapper">
             <h1 class="jumbotron-heading">МГНОВЕННЫЕ ЗАЙМЫ ОНЛАЙН - КРУГЛОСУТОЧНО!</h1>
             <h2>подайте заявку в 3-4 компании для 100% получения денег</h2>
-            <a href="#" class="butt" @click="$vuetify.goTo('.album',options)">оформить заявку</a>
+            <a href="#" class="butt" @click="$vuetify.goTo('.album', options)">оформить заявку</a>
           </div>
         </div>
       </section>
@@ -207,6 +207,15 @@ export default {
         patronymic: null,
         email: null,
         phone: null
+      }
+    }
+  },
+  mounted () {
+    window.onscroll = function () {
+      if (window.pageYOffset > 500) {
+        document.querySelector('.butt--fixed').classList.add('show')
+      } else {
+        document.querySelector('.butt--fixed').classList.remove('show')
       }
     }
   },
@@ -379,11 +388,19 @@ export default {
       font-weight: 600 !important;
       background-color: #00cc1b !important;
       z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s;
       @media(max-width: 1264px) {
         right: 0;
         bottom: 0;
         left: 0;
         width: 100%;
+      }
+
+      &.show {
+        opacity: 1;
+        pointer-events: all;
       }
     }
   }
