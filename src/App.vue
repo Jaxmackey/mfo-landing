@@ -17,7 +17,7 @@
                 class="butt butt--fixed"
                 v-bind="attrs"
                 v-on="on"
-                v-show="orderBtn"
+                v-show="orderBtn && !dialog"
                 color="#00cc1b"
               >
                 Oформить заявку
@@ -27,83 +27,158 @@
               <v-card-title>
                 <span class="headline">Введите ваши данные</span>
               </v-card-title>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        label="Фамилия"
-                        required
-                        v-model="orderInfo.lastName"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        label="Имя"
-                        required
-                        v-model="orderInfo.firstName"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        label="Отчество"
-                        required
-                        v-model="orderInfo.patronymic"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="Email*"
-                        required
-                        v-model="orderInfo.email"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="Телефон*"
-                        type="tel"
-                        required
-                        v-model="orderInfo.phone"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <div>Выбранные партнеры:</div>
-                      <ul>
-                        <li v-for="(item, i) in chooseItems" :key="i">{{ item.Title }}</li>
-                      </ul>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="dialog = false"
-                >
-                  Закрыть
-                </v-btn>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="dialog = false"
-                >
-                  Отправить
-                </v-btn>
-              </v-card-actions>
+              <validation-observer
+                ref="observer"
+                v-slot="{ invalid }"
+              >
+                <v-card-text>
+                  <v-container>
+                    <form @submit.prevent="sendOrder">
+                        <v-row>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <validation-provider
+                              v-slot="{ errors }"
+                              name="Фамилия"
+                              rules="required"
+                            >
+                              <v-text-field
+                                label="Фамилия"
+                                required
+                                v-model="orderInfo.lastName"
+                                :error-messages="errors"
+                              ></v-text-field>
+                            </validation-provider>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <validation-provider
+                              v-slot="{ errors }"
+                              name="Имя"
+                              rules="required"
+                            >
+                              <v-text-field
+                                label="Имя"
+                                required
+                                v-model="orderInfo.firstName"
+                                :error-messages="errors"
+                              ></v-text-field>
+                            </validation-provider>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              label="Отчество"
+                              v-model="orderInfo.patronymic"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <validation-provider
+                              v-slot="{ errors }"
+                              name="Email"
+                              rules="required|email"
+                            >
+                              <v-text-field
+                                label="Email"
+                                required
+                                v-model="orderInfo.email"
+                                :error-messages="errors"
+                              ></v-text-field>
+                            </validation-provider>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <validation-provider
+                              v-slot="{ errors }"
+                              name="Телефон"
+                              rules="required"
+                            >
+                              <v-text-field
+                                label="Телефон"
+                                type="tel"
+                                required
+                                v-model="orderInfo.phone"
+                                :error-messages="errors"
+                              ></v-text-field>
+                            </validation-provider>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <validation-provider
+                              v-slot="{ errors }"
+                              name="Страна"
+                              rules="required"
+                            >
+                              <v-text-field
+                                label="Страна"
+                                type="text"
+                                required
+                                v-model="orderInfo.country"
+                                :error-messages="errors"
+                              ></v-text-field>
+                            </validation-provider>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <validation-provider
+                              v-slot="{ errors }"
+                              name="Город"
+                              rules="required"
+                            >
+                              <v-text-field
+                                label="Город"
+                                type="text"
+                                required
+                                v-model="orderInfo.city"
+                                :error-messages="errors"
+                              ></v-text-field>
+                            </validation-provider>
+                          </v-col>
+                          <v-col cols="12">
+                            <div>Выбранные партнеры:</div>
+                            <ul>
+                              <li v-for="(item, i) in chooseItems" :key="i">{{ item.Title }}</li>
+                            </ul>
+                          </v-col>
+                            <validation-provider
+                              v-slot="{ errors }"
+                              rules="required"
+                              name="personalData"
+                            >
+                              <v-checkbox
+                                v-model="orderInfo.personalData"
+                                label="Нажимая кнопку 'Отправить' Вы даёте свое согласие на обработку введенной персональной информации"
+                                required
+                                :error-messages="errors"
+                              ></v-checkbox>
+                            </validation-provider>
+                        </v-row>
+                    </form>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    @click="dialog=false"
+                  >
+                    Закрыть
+                  </v-btn>
+                  <v-btn
+                    color="#00cc1b"
+                    type="submit"
+                    @click="sendOrder"
+                    :disabled="invalid"
+                  >
+                    Отправить
+                  </v-btn>
+                </v-card-actions>
+              </validation-observer>
             </v-card>
           </v-dialog>
         </div>
@@ -149,7 +224,7 @@
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="items">
-            <div class="item" @click="setChooseItems(item, $event)" v-for="(item, i1) in items" :key="i1">
+            <div class="item" @click="setChooseItems(item, $event);" v-for="(item, i1) in items" :key="i1">
               <div class="item-photo">
                 <img :src="getImgUrl(item.NameImageLogo)" alt="">
               </div>
@@ -192,9 +267,27 @@
 <script>
 import dataItems from './data'
 import axios from 'axios'
+import { required, email } from 'vee-validate/dist/rules'
+import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+
+setInteractionMode('eager')
+
+extend('required', {
+  ...required,
+  message: 'Поле {_field_} не должно быть пустым'
+})
+
+extend('email', {
+  ...email,
+  message: 'Введите корректный email'
+})
 
 export default {
   name: 'App',
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data: () => {
     return {
       items: dataItems,
@@ -206,7 +299,10 @@ export default {
         lastName: null,
         patronymic: null,
         email: null,
-        phone: null
+        phone: null,
+        country: null,
+        city: null,
+        personalData: false
       }
     }
   },
@@ -224,7 +320,6 @@ export default {
       return require(`./assets/images/mfo-logos/${pic}.png`)
     },
     setChooseItems (item, e) {
-      console.log(e)
       if (this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)) {
         const delItem = this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)
         this.chooseItems.splice(this.chooseItems.indexOf(delItem), 1)
@@ -235,14 +330,27 @@ export default {
       }
       this.chooseItems.length > 0 ? this.orderBtn = true : this.orderBtn = false
     },
+    clear () {
+      this.$v.$reset()
+      this.orderInfo.lastName = ''
+      this.orderInfo.firstName = ''
+      this.orderInfo.patronymic = ''
+      this.orderInfo.email = ''
+      this.orderInfo.phone = ''
+      this.orderInfo.country = ''
+      this.orderInfo.city = ''
+      this.orderInfo.personalData = false
+    },
     sendOrder () {
       axios
-        .post('http://www.omdbapi.com/?s=mummy&apikey=XXXXX&page=1&type=movie&Content-Type=application/json', {
+        .post('test', {
           firstName: this.orderInfo.firstName,
           lastName: this.orderInfo.lastName,
           patronymic: this.orderInfo.patronymic,
           email: this.orderInfo.email,
           phone: this.orderInfo.phone,
+          country: this.orderInfo.country,
+          city: this.orderInfo.city,
           chooseItems: this.chooseItems
         })
         .then(response => {
