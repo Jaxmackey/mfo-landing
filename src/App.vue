@@ -35,6 +35,30 @@
                   <v-container>
                     <form @submit.prevent="sendOrder">
                         <v-row>
+                          <v-col cols="12" sm="6">
+                            <validation-provider
+                              v-slot="{ errors }"
+                              name="Сумма займа"
+                              rules="required"
+                            >
+                              <v-text-field
+                                label="Сумма займа, руб."
+                                type="number"
+                                required
+                                v-model="orderInfo.sum"
+                                :error-messages="errors"
+                              ></v-text-field>
+                            </validation-provider>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <v-slider
+                              v-model="orderInfo.period"
+                              min="1"
+                              max="30"
+                              label="Срок займа, дней"
+                              thumb-label="always"
+                            ></v-slider>
+                          </v-col>
                           <v-col
                             cols="12"
                             sm="6"
@@ -295,6 +319,8 @@ export default {
       chooseItems: [],
       orderBtn: false,
       orderInfo: {
+        sum: 0,
+        period: 0,
         firstName: null,
         lastName: null,
         patronymic: null,
@@ -339,11 +365,14 @@ export default {
       this.orderInfo.phone = ''
       this.orderInfo.country = ''
       this.orderInfo.city = ''
+      this.orderInfo.sum = ''
       this.orderInfo.personalData = false
     },
     sendOrder () {
       axios
-        .post('test', {
+        .post('http://194.58.120.164/', {
+          sum: this.orderInfo.sum,
+          period: this.orderInfo.period,
           firstName: this.orderInfo.firstName,
           lastName: this.orderInfo.lastName,
           patronymic: this.orderInfo.patronymic,
@@ -351,7 +380,7 @@ export default {
           phone: this.orderInfo.phone,
           country: this.orderInfo.country,
           city: this.orderInfo.city,
-          chooseItems: this.chooseItems
+          chooseItems: this.chooseItems.map((item) => item?.title)
         })
         .then(response => {
           console.log(response)
