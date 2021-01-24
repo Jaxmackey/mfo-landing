@@ -1,18 +1,5 @@
 <template>
   <v-app id="app">
-    <header>
-      <div class="container">
-        <a href="/">
-          <img src="./assets/logo.svg" alt="logo">
-        </a>
-        <div class="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </header>
-
     <main>
       <div class="offer">
         <div class="container">
@@ -230,35 +217,6 @@ h2 {
       transform: translate(0, 0);
       border-color: #B69453;
     }
-  }
-}
-
-//header styles
-
-header {
-  background: #303030;
-
-  .container {
-    height: 80px;
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-.hamburger {
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  width: 40px;
-  height: 22px;
-  justify-content: space-between;
-  cursor: pointer;
-
-  span {
-    background: #B69453;
-    border-radius: 2px;
-    width: 100%;
-    height: 4px;
   }
 }
 
