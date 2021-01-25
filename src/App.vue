@@ -71,10 +71,231 @@
         <div class="container">
           <h2>Наши <span>партнёры</span></h2>
           <form class="filter"><!-- фильтры партнёров --></form>
-          <div class="partners__wrapper"><!-- карточки партнёров --></div>
+          <div class="partners__wrapper">
+            <div class="partners__item active">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info active">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">скрыть</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item checked">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#" class="checked">выбрано</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+            <div class="partners__item">
+              <div class="partners__logo">
+                <img src="./assets/images/mfo-logos/7HND382EN33ZF3KOR9B4JFI5W9G.png" alt="">
+              </div>
+              <div class="partners__info">
+                <div class="partners__title">Быстроденьги - выданный займ онлайн</div>
+                <div class="partners__text">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+                <div class="partners__subtitle">Информация о продукте:</div>
+                <ul class="partners__list">
+                  <li>Краткосрочные займы:</li>
+                  <li>Сумма: от 1 000 до 30 000 рублей</li>
+                  <li>Срок: от 1 до 30 дней</li>
+                  <li>Процентная ставка: 1 % в день</li>
+                  <li>Валюта: Рубли</li>
+                  <li>Займы доступны как онлайн, так и в офисе финансового обслуживания</li>
+                </ul>
+                <div class="partners__actions">
+                  <a href="#">подробнее</a>
+                  <a href="#">выбрать</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
+
+    <footer class="footer">
+      <div class="container">
+        <a href="/">
+          <img src="./assets/logo.svg" alt="logo">
+        </a>
+        <div class="footer__copyright">©Все права защищены 2021 ezmoney.</div>
+      </div>
+    </footer>
   </v-app>
 </template>
 
@@ -360,5 +581,239 @@ header {
   @media (max-width: 991px) {
     padding: 40px 0;
   }
+}
+
+.partners__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -12px;
+
+  @media(max-width: 767px) {
+    margin: 0;
+  }
+}
+
+//partners single cart styles
+
+.partners__item {
+  width: calc(25% - 24px);
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  position: relative;
+  border: 1px solid rgba(88, 87, 87, 0.23);
+  transition: .3s;
+  min-height: 350px;
+
+  @media(max-width: 1199px) {
+    width: calc(33.33% - 24px);
+  }
+
+  @media(max-width: 991px) {
+    width: calc(50% - 24px);
+  }
+
+  @media(max-width: 767px) {
+    width: calc(100% - 20px);
+    margin: 10px;
+  }
+
+  &.active {
+    border: 1px solid transparent;
+    z-index: 1000;
+
+    .partners__logo{
+      box-shadow: 0px 1px 15px 5px rgba(88, 87, 87, 0.23);
+      position: relative;
+    }
+  }
+
+  &.checked {
+    border-color: rgba(35, 148, 1, .23);
+    box-shadow: 0px 1px 15px 5px rgba(35, 148, 1, .23);
+  }
+}
+
+.partners__logo {
+  width: 100%;
+  height: 70px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.partners__info {
+  max-height: 300px;
+  position: relative;
+  overflow: hidden;
+  padding: 20px 20px 0;
+
+  &.active {
+    max-height: none;
+    position: absolute;
+    left: 0;
+    top: 70px;
+    background: #ffffff;
+    z-index: 100;
+    box-shadow: 0px 15px 15px 5px rgba(88, 87, 87, 0.23);
+    padding-bottom: 70px;
+  }
+}
+
+.partners__title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.partners__text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: #9E9E9E;
+  margin-bottom: 10px;
+}
+
+.partners__subtitle {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #B69453;
+}
+
+.partners__list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  li {
+    position: relative;
+    padding-left: 10px;
+    font-size: 12px;
+    margin: 3px 0;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: #B69453;
+    }
+  }
+}
+
+.partners__actions {
+  position: absolute;
+  top: calc(100% - 40px);
+  height: 40px;
+  display: flex;
+  background: #ffffff;
+  z-index: 200;
+  left: 0;
+  width: 100%;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    background: linear-gradient(to top, #ffffff, transparent);
+  }
+
+  a {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    height: 40px;
+    position: relative;
+
+    &:first-child {
+      font-size: 11px;
+      text-align: center;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E97000;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -1px;
+        bottom: -1px;
+        width: 12px;
+        height: 12px;
+        background: #ffa047;
+        transition: .3s;
+        opacity: 0;
+      }
+
+      &:hover {
+        color: #ffa047;
+
+        &:before {
+          opacity: 1;
+        }
+      }
+    }
+
+    &:last-child {
+      background: #B69453;
+      color: #ffffff;
+      font-size: 11px;
+      text-align: center;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+
+      &:hover {
+        background: #d1ab64;
+      }
+    }
+
+    &.checked {
+      background: #239401;
+
+      &:hover {
+        background: #2bb900;
+      }
+    }
+  }
+}
+
+//footer styles
+
+.footer {
+  background: #303030;
+
+  .container {
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    justify-content: space-between;
+  }
+
+  a {
+    @media(max-width: 767px) {
+      display: none;
+    }
+  }
+}
+
+.footer__copyright {
+  font-size: 11px;
+  line-height: 103%;
+  text-align: center;
+  letter-spacing: 0.15em;
+  color: #BBBBBB;
 }
 </style>
