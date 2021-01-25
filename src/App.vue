@@ -1,6 +1,7 @@
 <template>
   <v-app id="app">
     <main>
+      <Header />
       <div class="offer">
         <div class="container">
           <h1>Мы поможем получить деньги быстро</h1>
@@ -10,67 +11,309 @@
           </a>
         </div>
       </div>
-
       <div class="container">
-        <div class="advantages">
-          <h2>Кто может получить <span>деньги</span></h2>
-          <div class="advantages__wrapper">
-            <div class="advantages__item">
-              <div class="advantages__icon">
-                <img src="./assets/adv-1.svg" alt="">
-              </div>
-              <div class="advantages__text">студенты</div>
-            </div>
-            <div class="advantages__item">
-              <div class="advantages__icon">
-                <img src="./assets/adv-2.svg" alt="">
-              </div>
-              <div class="advantages__text">БЕЗ ОФИЦИАЛЬНОГО МЕСТА РАБОТЫ</div>
-            </div>
-            <div class="advantages__item">
-              <div class="advantages__icon">
-                <img src="./assets/adv-3.svg" alt="">
-              </div>
-              <div class="advantages__text">ИМЕЮЩИМ СУДИМОСТИ</div>
-            </div>
-            <div class="advantages__item">
-              <div class="advantages__icon">
-                <img src="./assets/adv-4.svg" alt="">
-              </div>
-              <div class="advantages__text">ПЕНСИОНЕРАМ</div>
-            </div>
-            <div class="advantages__item">
-              <div class="advantages__icon">
-                <img src="./assets/adv-5.svg" alt="">
-              </div>
-              <div class="advantages__text">С ПЛОХОЙ КРЕДИТНОЙ ИСТОРИЕЙ</div>
-            </div>
-            <div class="advantages__item">
-              <div class="advantages__icon">
-                <img src="./assets/adv-6.svg" alt="">
-              </div>
-              <div class="advantages__text">НАХОДЯЩИМСЯ В ДЕКРЕТЕ</div>
-            </div>
-          </div>
-        </div>
+        <Advantages />
       </div>
-      <div class="partners">
-        <div class="container">
-          <h2>Наши <span>партнёры</span></h2>
-          <form class="filter"><!-- фильтры партнёров --></form>
-          <div class="partners__wrapper"><!-- карточки партнёров --></div>
-        </div>
-      </div>
+      <Partners
+        :items = items
+        @updateParent="onUpdateSalary"
+      />
     </main>
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          class="butt butt--fixed"
+          v-bind="attrs"
+          v-on="on"
+          v-show="orderBtn && !dialog"
+          color="#00cc1b"
+        >
+          Oформить заявку
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Введите ваши данные</span>
+        </v-card-title>
+        <validation-observer
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <v-card-text>
+            <v-container>
+              <form @submit.prevent="sendOrder">
+                <v-row>
+                  <v-col cols="12" sm="6">
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Сумма займа"
+                      rules="required"
+                    >
+                      <v-text-field
+                        label="Сумма займа, руб."
+                        type="number"
+                        required
+                        v-model="orderInfo.sum"
+                        :error-messages="errors"
+                      ></v-text-field>
+                    </validation-provider>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-slider
+                      v-model="orderInfo.period"
+                      min="1"
+                      max="30"
+                      label="Срок займа, дней"
+                      thumb-label="always"
+                    ></v-slider>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Фамилия"
+                      rules="required"
+                    >
+                      <v-text-field
+                        label="Фамилия"
+                        required
+                        v-model="orderInfo.lastName"
+                        :error-messages="errors"
+                      ></v-text-field>
+                    </validation-provider>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Имя"
+                      rules="required"
+                    >
+                      <v-text-field
+                        label="Имя"
+                        required
+                        v-model="orderInfo.firstName"
+                        :error-messages="errors"
+                      ></v-text-field>
+                    </validation-provider>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      label="Отчество"
+                      v-model="orderInfo.patronymic"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Email"
+                      rules="required|email"
+                    >
+                      <v-text-field
+                        label="Email"
+                        required
+                        v-model="orderInfo.email"
+                        :error-messages="errors"
+                      ></v-text-field>
+                    </validation-provider>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Телефон"
+                      rules="required"
+                    >
+                      <v-text-field
+                        label="Телефон"
+                        type="tel"
+                        required
+                        v-model="orderInfo.phone"
+                        :error-messages="errors"
+                      ></v-text-field>
+                    </validation-provider>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Страна"
+                      rules="required"
+                    >
+                      <v-text-field
+                        label="Страна"
+                        type="text"
+                        required
+                        v-model="orderInfo.country"
+                        :error-messages="errors"
+                      ></v-text-field>
+                    </validation-provider>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Город"
+                      rules="required"
+                    >
+                      <v-text-field
+                        label="Город"
+                        type="text"
+                        required
+                        v-model="orderInfo.city"
+                        :error-messages="errors"
+                      ></v-text-field>
+                    </validation-provider>
+                  </v-col>
+                  <v-col cols="12">
+                    <div>Выбранные партнеры:</div>
+                    <ul>
+                      <li v-for="(item, i) in chooseItems" :key="i">{{ item.Title }}</li>
+                    </ul>
+                  </v-col>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    rules="required"
+                    name="personalData"
+                  >
+                    <v-checkbox
+                      v-model="orderInfo.personalData"
+                      label="Нажимая кнопку 'Отправить' Вы даёте свое согласие на обработку введенной персональной информации"
+                      required
+                      :error-messages="errors"
+                    ></v-checkbox>
+                  </validation-provider>
+                </v-row>
+              </form>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              @click="dialog=false"
+            >
+              Закрыть
+            </v-btn>
+            <v-btn
+              color="#00cc1b"
+              type="submit"
+              @click="sendOrder"
+              :disabled="invalid"
+            >
+              Отправить
+            </v-btn>
+          </v-card-actions>
+        </validation-observer>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
 <script>
+import dataItems from '@/data'
+import Header from './components/header'
+import Advantages from './components/advantages'
+import Partners from './components/partners'
+import axios from 'axios'
+import { required, email } from 'vee-validate/dist/rules'
+import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+
+setInteractionMode('eager')
+
+extend('required', {
+  ...required,
+  message: 'Поле {_field_} не должно быть пустым'
+})
+
+extend('email', {
+  ...email,
+  message: 'Введите корректный email'
+})
 
 export default {
   name: 'App',
+  components: {
+    Header,
+    Advantages,
+    Partners,
+    ValidationProvider,
+    ValidationObserver
+  },
   data: () => {
-    return {}
+    return {
+      items: dataItems,
+      orderInfo: {
+        sum: 0,
+        period: 0,
+        firstName: null,
+        lastName: null,
+        patronymic: null,
+        email: null,
+        phone: null,
+        country: null,
+        city: null,
+        personalData: false
+      },
+      dialog: false,
+      orderBtn: false
+    }
+  },
+  methods: {
+    onUpdateSalary (someData) {
+      this.orderBtn = someData.orderBtn
+      this.chooseItems = someData.chooseItems
+    },
+    clear () {
+      this.$v.$reset()
+      this.orderInfo.lastName = ''
+      this.orderInfo.firstName = ''
+      this.orderInfo.patronymic = ''
+      this.orderInfo.email = ''
+      this.orderInfo.phone = ''
+      this.orderInfo.country = ''
+      this.orderInfo.city = ''
+      this.orderInfo.sum = ''
+      this.orderInfo.personalData = false
+    },
+    sendOrder () {
+      axios
+        .post('http://194.58.120.164:8080/', {
+          sum: parseInt(this.orderInfo.sum),
+          period: this.orderInfo.period,
+          firstName: this.orderInfo.firstName,
+          lastName: this.orderInfo.lastName,
+          patronymic: this.orderInfo.patronymic,
+          email: this.orderInfo.email,
+          phone: parseInt(this.orderInfo.phone),
+          country: this.orderInfo.country,
+          city: this.orderInfo.city,
+          personalData: this.orderInfo.personalData,
+          chooseItems: this.chooseItems.map((item) => item?.Title)
+        },
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>
@@ -78,147 +321,7 @@ export default {
 <style lang="scss">
 // global styles
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Arial', sans-serif;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  transition: .3s;
-}
-
-p {
-  margin: 0;
-}
-
-img {
-  max-width: 100%;
-}
-
-.container {
-  width: 1280px;
-  margin: 0 auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 1440px) {
-    width: 1150px;
-  }
-  @media (max-width: 1199px) {
-    width: 870px;
-  }
-  @media (max-width: 991px) {
-    width: 720px;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-    margin: 0;
-    padding: 0 10px;
-  }
-}
-
-h1 {
-  font-weight: 900;
-  font-size: 54px;
-  line-height: 76px;
-  text-transform: uppercase;
-  color: #ffffff;
-  max-width: 880px;
-  margin-bottom: 30px;
-
-  @media(max-width: 991px) {
-    font-size: 38px;
-    line-height: 46px;
-  }
-  @media(max-width: 767px) {
-    font-size: 22px;
-    line-height: 31px;
-  }
-}
-
-h2 {
-  font-size: 86px;
-  line-height: 103%;
-  text-align: center;
-  letter-spacing: 0.07em;
-  margin-bottom: 60px;
-
-  @media(max-width: 991px) {
-    font-size: 36px;
-    line-height: 103%;
-    text-align: center;
-    letter-spacing: 0.02em;
-  }
-
-  span {
-    color: #B69453;
-  }
-}
-
-.butt {
-  position: relative;
-  display: inline-flex;
-  padding: 0 20px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 24px;
-  text-align: center;
-  justify-content: center;
-  color: #ffffff !important;
-  height: 56px;;
-  align-items: center;
-
-  span {
-    position: relative;
-    z-index: 2;
-  }
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 1px solid #ffffff;
-    transform: translate(-2px, -2px);
-    transition: .2s;
-  }
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: translate(2px, 2px);
-    background: #B69453;
-    transition: .2s;
-  }
-
-  &:hover {
-    &:before,
-    &:after {
-      transform: translate(0, 0);
-      border-color: #B69453;
-    }
-  }
-}
+@import './assets/scss/base';
 
 //offer styles
 
@@ -246,77 +349,6 @@ h2 {
   @media(max-width: 767px) {
     font-size: 14px;
     line-height: 17px;
-  }
-}
-
-//advantages styles
-
-.advantages {
-  padding: 80px 0;
-
-  @media(max-width: 991px) {
-    padding: 40px 0;
-  }
-}
-
-.advantages__wrapper {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.advantages__item {
-  max-width: 33.33%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 15px 0;
-
-  @media(max-width: 767px) {
-    max-width: 50%;
-  }
-}
-
-.advantages__icon {
-  margin-bottom: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 115px;
-
-  img {
-    height: 100%;
-  }
-
-  @media (max-width: 991px) {
-    height: 80px;
-  }
-}
-
-.advantages__text {
-  max-width: 250px;
-  color: #B69453;
-  text-align: center;text-transform: uppercase;
-  font-weight: bold;
-  font-size: 22px;
-  padding: 0 10px;
-
-  @media (max-width: 991px) {
-    font-size: 14px;
-    max-width: 170px;
-  }
-}
-
-//partners styles
-
-.partners {
-  border-top: 1px solid #B69453;
-  background: rgba(236, 224, 193, 0.23);
-  padding: 80px 0;
-
-  @media (max-width: 991px) {
-    padding: 40px 0;
   }
 }
 </style>
