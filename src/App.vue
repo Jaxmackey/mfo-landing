@@ -6,7 +6,11 @@
         <div class="container">
           <h1>Мы поможем получить деньги быстро</h1>
           <div class="offer__descr">Помогаем  выбрать заёмщика с наилучшими условиями. Вам ничего не нужно делать, просто оформите заявку у нас на сайте и ждите одобрения</div>
-          <a href="#" class="butt">
+          <a
+            href="#"
+            class="butt"
+            @click="$vuetify.goTo('.partners', options)"
+          >
             <span>Оформить зявку</span>
           </a>
         </div>
@@ -29,7 +33,7 @@
           class="butt butt--fixed"
           v-bind="attrs"
           v-on="on"
-          v-show="orderBtn && !dialog"
+          v-show="chooseItems.length > 0 && !dialog"
           color="#00cc1b"
         >
           Oформить заявку
@@ -44,159 +48,151 @@
           v-slot="{ invalid }"
         >
           <v-card-text>
-            <v-container>
-              <form @submit.prevent="sendOrder">
-                <v-row>
-                  <v-col cols="12" sm="6">
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Сумма займа"
-                      rules="required"
-                    >
-                      <v-text-field
-                        label="Сумма займа, руб."
-                        type="number"
-                        required
-                        v-model="orderInfo.sum"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </validation-provider>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-slider
-                      v-model="orderInfo.period"
-                      min="1"
-                      max="30"
-                      label="Срок займа, дней"
-                      thumb-label="always"
-                    ></v-slider>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Фамилия"
-                      rules="required"
-                    >
-                      <v-text-field
-                        label="Фамилия"
-                        required
-                        v-model="orderInfo.lastName"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </validation-provider>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Имя"
-                      rules="required"
-                    >
-                      <v-text-field
-                        label="Имя"
-                        required
-                        v-model="orderInfo.firstName"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </validation-provider>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      label="Отчество"
-                      v-model="orderInfo.patronymic"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Email"
-                      rules="required|email"
-                    >
-                      <v-text-field
-                        label="Email"
-                        required
-                        v-model="orderInfo.email"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </validation-provider>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Телефон"
-                      rules="required"
-                    >
-                      <v-text-field
-                        label="Телефон"
-                        type="tel"
-                        required
-                        v-model="orderInfo.phone"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </validation-provider>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Страна"
-                      rules="required"
-                    >
-                      <v-text-field
-                        label="Страна"
-                        type="text"
-                        required
-                        v-model="orderInfo.country"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </validation-provider>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Город"
-                      rules="required"
-                    >
-                      <v-text-field
-                        label="Город"
-                        type="text"
-                        required
-                        v-model="orderInfo.city"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </validation-provider>
-                  </v-col>
-                  <v-col cols="12">
-                    <div>Выбранные партнеры:</div>
-                    <ul>
-                      <li v-for="(item, i) in chooseItems" :key="i">{{ item.Title }}</li>
-                    </ul>
-                  </v-col>
+            <form @submit.prevent="sendOrder">
+              <v-row>
+                <v-col cols="12" sm="6">
+                  <v-text-field
+                    label="Сумма займа, руб."
+                    type="number"
+                    disabled
+                    v-model="orderInfo.sum"
+                    :error-messages="errors"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field
+                    label="Срок займа, дней"
+                    type="number"
+                    disabled
+                    v-model="orderInfo.period"
+                    :error-messages="errors"
+                  ></v-text-field>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
                   <validation-provider
                     v-slot="{ errors }"
+                    name="Фамилия"
                     rules="required"
-                    name="personalData"
                   >
-                    <v-checkbox
-                      v-model="orderInfo.personalData"
-                      label="Нажимая кнопку 'Отправить' Вы даёте свое согласие на обработку введенной персональной информации"
+                    <v-text-field
+                      label="Фамилия"
                       required
+                      v-model="orderInfo.lastName"
                       :error-messages="errors"
-                    ></v-checkbox>
+                    ></v-text-field>
                   </validation-provider>
-                </v-row>
-              </form>
-            </v-container>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Имя"
+                    rules="required"
+                  >
+                    <v-text-field
+                      label="Имя"
+                      required
+                      v-model="orderInfo.firstName"
+                      :error-messages="errors"
+                    ></v-text-field>
+                  </validation-provider>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
+                  <v-text-field
+                    label="Отчество"
+                    v-model="orderInfo.patronymic"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Email"
+                    rules="required|email"
+                  >
+                    <v-text-field
+                      label="Email"
+                      required
+                      v-model="orderInfo.email"
+                      :error-messages="errors"
+                    ></v-text-field>
+                  </validation-provider>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Телефон"
+                    rules="required"
+                  >
+                    <v-text-field
+                      label="Телефон"
+                      type="tel"
+                      required
+                      v-model="orderInfo.phone"
+                      :error-messages="errors"
+                    ></v-text-field>
+                  </validation-provider>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Страна"
+                    rules="required"
+                  >
+                    <v-text-field
+                      label="Страна"
+                      type="text"
+                      required
+                      v-model="orderInfo.country"
+                      :error-messages="errors"
+                    ></v-text-field>
+                  </validation-provider>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Город"
+                    rules="required"
+                  >
+                    <v-text-field
+                      label="Город"
+                      type="text"
+                      required
+                      v-model="orderInfo.city"
+                      :error-messages="errors"
+                    ></v-text-field>
+                  </validation-provider>
+                </v-col>
+                <v-col cols="12">
+                  <div>Выбранные партнеры:</div>
+                  <ul>
+                    <li v-for="(item, i) in chooseItems" :key="i">{{ item.Title }}</li>
+                  </ul>
+                </v-col>
+                <validation-provider
+                  v-slot="{ errors }"
+                  rules="required"
+                  name="personalData"
+                >
+                  <v-checkbox
+                    v-model="orderInfo.personalData"
+                    label="Нажимая кнопку 'Отправить' Вы даёте свое согласие на обработку введенной персональной информации"
+                    required
+                    :error-messages="errors"
+                  ></v-checkbox>
+                </validation-provider>
+              </v-row>
+            </form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -217,6 +213,19 @@
         </validation-observer>
       </v-card>
     </v-dialog>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      Спасибо за оформление заказа! С Вами свяжутся в ближайшее время!
+    </v-snackbar>
+    <footer class="footer">
+      <div class="container">
+        <a href="/">
+          <img src="./assets/logo.svg" alt="logo">
+        </a>
+        <div class="footer__copyright">©Все права защищены 2021 ezmoney.</div>
+      </div>
+    </footer>
   </v-app>
 </template>
 
@@ -253,6 +262,7 @@ export default {
   data: () => {
     return {
       items: dataItems,
+      chooseItems: [],
       orderInfo: {
         sum: 0,
         period: 0,
@@ -266,13 +276,16 @@ export default {
         personalData: false
       },
       dialog: false,
-      orderBtn: false
+      orderBtn: false,
+      snackbar: false
     }
   },
   methods: {
     onUpdateSalary (someData) {
       this.orderBtn = someData.orderBtn
       this.chooseItems = someData.chooseItems
+      this.orderInfo.sum = someData.sum
+      this.orderInfo.period = someData.period
     },
     clear () {
       this.$v.$reset()
@@ -309,9 +322,11 @@ export default {
         })
         .then(response => {
           console.log(response)
+          this.snackbar = true
         })
         .catch(error => {
           console.log(error)
+          this.false = true
         })
     }
   }
@@ -350,5 +365,32 @@ export default {
     font-size: 14px;
     line-height: 17px;
   }
+}
+//footer styles
+
+.footer {
+  background: #303030;
+  padding: 20px 0;
+
+  .container {
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    justify-content: space-between;
+  }
+
+  a {
+    @media(max-width: 767px) {
+      display: none;
+    }
+  }
+}
+
+.footer__copyright {
+  font-size: 11px;
+  line-height: 103%;
+  text-align: center;
+  letter-spacing: 0.15em;
+  color: #BBBBBB;
 }
 </style>
