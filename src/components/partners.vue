@@ -28,47 +28,64 @@
           </v-col>
         </v-row>
       </form>
-      <div class="partners__wrapper" v-if="itemsNew">
+      <div class="partners__wrapper" v-if="itemsNew.length > 0">
         <div class="partners__item" v-for="(item, i) in itemsNew" :key="i">
           <div class="partners__logo">
             <img :src="getImgUrl(item.NameImageLogo)" alt="">
           </div>
-          <div class="partners__info">
-            <div class="partners__title" v-if="item.Title">{{ item.Title }}</div>
-            <div class="partners__text" v-if="item.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
-            <div v-if="item.InfoProduct.length > 0">
-              <div class="partners__subtitle">Информация о продукте:</div>
-              <ul class="partners__list">
-                <li v-for="(info, i2) in item.InfoProduct" :key="i2">{{ info }}</li>
-              </ul>
-            </div>
-            <div v-if="item.SposobiGeta.length > 0">
-              <div class="partners__subtitle">Способы оплаты:</div>
-              <ul class="partners__list">
-                <li v-for="(sposob, i3) in item.SposobiGeta" :key="i3">{{ sposob }}</li>
-              </ul>
-            </div>
-            <div v-if="item.ReqZaemshik.length > 0">
-              <div class="partners__subtitle">Обязательно:</div>
-              <ul class="partners__list">
-                <li v-for="(req, i4) in item.ReqZaemshik" :key="i4">{{ req }}</li>
-              </ul>
-            </div>
-            <div v-if="item.SposobiPogas.length > 0">
-              <div class="partners__subtitle">Способы погашения:</div>
-              <ul class="partners__list">
-                <li v-for="(pogas, i5) in item.SposobiPogas" :key="i5">{{ pogas }}</li>
-              </ul>
-            </div>
-            <div class="partners__actions">
-              <div @click="setInfo($event);">подробнее</div>
-              <div @click="setChooseItems(item, $event);">выбрать</div>
-            </div>
+          <div class="partners__title" v-if="item.Title">{{ item.Title }}</div>
+          <div class="partners__text" v-if="item.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+          <div class="partners__actions">
+            <div @click="setInfo(item);">подробнее</div>
+            <div @click="setChooseItems(item, $event);">выбрать</div>
           </div>
         </div>
       </div>
-      <div v-else>По данному фильтру результатов не найдено</div>
+      <div v-else>По данному запросу результатов не найдено</div>
     </div>
+    <v-dialog
+      v-model="showMore"
+      persistent
+      max-width="800px"
+    >
+      <v-btn
+        icon
+        dark
+        @click="showMore = false"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      <v-card v-if="moreInfo">
+        <div class="partners__info">
+          <div class="partners__title" v-if="moreInfo.Title">{{ moreInfo.Title }}</div>
+          <div class="partners__text" v-if="moreInfo.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+          <div v-if="moreInfo.InfoProduct.length > 0">
+            <div class="partners__subtitle">Информация о продукте:</div>
+            <ul class="partners__list">
+              <li v-for="(info, i2) in moreInfo.InfoProduct" :key="i2">{{ info }}</li>
+            </ul>
+          </div>
+          <div v-if="moreInfo.SposobiGeta.length > 0">
+            <div class="partners__subtitle">Способы оплаты:</div>
+            <ul class="partners__list">
+              <li v-for="(sposob, i3) in moreInfo.SposobiGeta" :key="i3">{{ sposob }}</li>
+            </ul>
+          </div>
+          <div v-if="moreInfo.ReqZaemshik.length > 0">
+            <div class="partners__subtitle">Обязательно:</div>
+            <ul class="partners__list">
+              <li v-for="(req, i4) in moreInfo.ReqZaemshik" :key="i4">{{ req }}</li>
+            </ul>
+          </div>
+          <div v-if="moreInfo.SposobiPogas.length > 0">
+            <div class="partners__subtitle">Способы погашения:</div>
+            <ul class="partners__list">
+              <li v-for="(pogas, i5) in moreInfo.SposobiPogas" :key="i5">{{ pogas }}</li>
+            </ul>
+          </div>
+        </div>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -83,7 +100,9 @@ export default {
       orderBtn: false,
       sum: 0,
       period: 0,
-      itemsNew: null
+      itemsNew: [],
+      showMore: false,
+      moreInfo: null
     }
   },
   methods: {
@@ -113,10 +132,12 @@ export default {
         sum: this.sum,
         period: this.period
       })
+      const btnText = e.target.innerHTML === 'выбрать' ? 'отменить' : 'выбрать'
+      e.target.innerHTML = btnText
     },
-    setInfo (e) {
-      e.target.closest('.partners__item').classList.add('active')
-      e.target.closest('.partners__info').classList.add('active')
+    setInfo (info) {
+      this.showMore = true
+      this.moreInfo = info
     },
     filterItems () {
       this.itemsNew = this.items.filter((item) => {
@@ -201,10 +222,9 @@ export default {
 }
 
 .partners__info {
-  max-height: 300px;
   position: relative;
   overflow: hidden;
-  padding: 20px 20px 0;
+  padding: 20px;
 
   &.active {
     max-height: none;

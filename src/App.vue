@@ -2,19 +2,7 @@
   <v-app id="app">
     <main>
       <Header />
-      <div class="offer">
-        <div class="container">
-          <h1>Мы поможем получить деньги быстро</h1>
-          <div class="offer__descr">Помогаем  выбрать заёмщика с наилучшими условиями. Вам ничего не нужно делать, просто оформите заявку у нас на сайте и ждите одобрения</div>
-          <a
-            href="#"
-            class="butt"
-            @click="$vuetify.goTo('.partners', options)"
-          >
-            <span>Оформить зявку</span>
-          </a>
-        </div>
-      </div>
+      <Offer />
       <div class="container">
         <Advantages />
       </div>
@@ -218,20 +206,15 @@
     >
       Спасибо за оформление заказа! С Вами свяжутся в ближайшее время!
     </v-snackbar>
-    <footer class="footer">
-      <div class="container">
-        <a href="/">
-          <img src="./assets/logo.svg" alt="logo">
-        </a>
-        <div class="footer__copyright">©Все права защищены 2021 ezmoney.</div>
-      </div>
-    </footer>
+    <Footer />
   </v-app>
 </template>
 
 <script>
 import dataItems from '@/data'
 import Header from './components/header'
+import Footer from './components/footer'
+import Offer from './components/offer'
 import Advantages from './components/advantages'
 import Partners from './components/partners'
 import axios from 'axios'
@@ -254,6 +237,8 @@ export default {
   name: 'App',
   components: {
     Header,
+    Footer,
+    Offer,
     Advantages,
     Partners,
     ValidationProvider,
@@ -333,63 +318,6 @@ export default {
 </script>
 
 <style lang="scss">
-// global styles
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import './assets/scss/base';
-
-//offer styles
-
-.offer {
-  background: url("./assets/offer.png") no-repeat;
-  background-size: cover;
-  background-position: center;
-
-  .container {
-    justify-content: center;
-    min-height: calc(100vh - 80px);
-    align-items: flex-start;
-  }
-}
-
-.offer__descr {
-  margin-bottom: 30px;
-  max-width: 470px;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  font-family: 'Montserrat', sans-serif;
-  color: #BBBBBB;
-
-  @media(max-width: 767px) {
-    font-size: 14px;
-    line-height: 17px;
-  }
-}
-//footer styles
-
-.footer {
-  background: #303030;
-  padding: 20px 0;
-
-  .container {
-    flex-direction: row;
-    align-items: center;
-    height: 60px;
-    justify-content: space-between;
-  }
-
-  a {
-    @media(max-width: 767px) {
-      display: none;
-    }
-  }
-}
-
-.footer__copyright {
-  font-size: 11px;
-  line-height: 103%;
-  text-align: center;
-  letter-spacing: 0.15em;
-  color: #BBBBBB;
-}
 </style>
