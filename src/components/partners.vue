@@ -18,7 +18,7 @@
           label="Срок займа, дней"
           thumb-label="always"
         />
-        <div class="butt" @click="filterItems();"><span>Найти</span></div>
+        <div class="butt butt--white" @click="filterItems();"><span>Найти</span></div>
       </form>
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
         <div class="partners__item" v-for="(item, i) in itemsNew" :key="i">
@@ -35,43 +35,44 @@
           </div>
         </div>
       </div>
-      <div v-else>По данному запросу результатов не найдено</div>
+      <div v-else class="result-empty">По данному запросу результатов не найдено</div>
     </div>
     <v-dialog
       v-model="showMore"
       persistent
       max-width="800px"
     >
-      <v-btn
-        icon
-        dark
-        @click="showMore = false"
-      >
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
+    <v-btn
+      icon
+      @click="showMore = false"
+      class="modal-close"
+    >
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
       <v-card v-if="moreInfo">
+
         <div class="partners__info">
           <div class="partners__title" v-if="moreInfo.Title">{{ moreInfo.Title }}</div>
           <div class="partners__text" v-if="moreInfo.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
-          <div v-if="moreInfo.InfoProduct.length > 0">
+          <div v-if="moreInfo.InfoProduct.length > 0" class="partners__block">
             <div class="partners__subtitle">Информация о продукте:</div>
             <ul class="partners__list">
               <li v-for="(info, i2) in moreInfo.InfoProduct" :key="i2">{{ info }}</li>
             </ul>
           </div>
-          <div v-if="moreInfo.SposobiGeta.length > 0">
+          <div v-if="moreInfo.SposobiGeta.length > 0" class="partners__block">
             <div class="partners__subtitle">Способы оплаты:</div>
             <ul class="partners__list">
               <li v-for="(sposob, i3) in moreInfo.SposobiGeta" :key="i3">{{ sposob }}</li>
             </ul>
           </div>
-          <div v-if="moreInfo.ReqZaemshik.length > 0">
+          <div v-if="moreInfo.ReqZaemshik.length > 0" class="partners__block">
             <div class="partners__subtitle">Обязательно:</div>
             <ul class="partners__list">
               <li v-for="(req, i4) in moreInfo.ReqZaemshik" :key="i4">{{ req }}</li>
             </ul>
           </div>
-          <div v-if="moreInfo.SposobiPogas.length > 0">
+          <div v-if="moreInfo.SposobiPogas.length > 0" class="partners__block">
             <div class="partners__subtitle">Способы погашения:</div>
             <ul class="partners__list">
               <li v-for="(pogas, i5) in moreInfo.SposobiPogas" :key="i5">{{ pogas }}</li>
@@ -154,6 +155,36 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 30px;
+  margin-top: 50px;
+  @media(max-width: 991px) {
+    width: calc(100% - 50px);
+    margin: 50px auto 20px;
+  }
+  @media(max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .butt {
+    min-width: 170px;
+    margin-left: 15px;
+    flex-shrink: 0;
+    @media(max-width: 767px) {
+      margin-left: auto;
+      margin-right: auto;
+      min-width: 250px;
+      margin-top: -20px;
+    }
+  }
+}
+
+.partners__block {
+  width: 50%;
+  flex-shrink: 0;
+  margin: 10px 0;
+  @media(max-width: 767px) {
+    width: 100%;
+  }
 }
 
 .partners {
@@ -194,14 +225,19 @@ export default {
     content: '';
     display: block;
     position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 32px;
-    height: 32px;
-    background: url("../assets/check.svg") no-repeat;
-    background-size: contain;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: calc(100% - 40px);
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url("../assets/check.svg");
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
     transition: .3s;
     opacity: 0;
+    z-index: 100;
+    pointer-events: none;
   }
 
   @media(max-width: 1199px) {
@@ -217,21 +253,10 @@ export default {
     margin: 10px;
   }
 
-  &.active {
-    border: 1px solid transparent;
-    z-index: 1000;
-
-    .partners__logo{
-      box-shadow: 0px 1px 15px 5px rgba(88, 87, 87, 0.23);
-      position: relative;
-    }
-  }
-
   &.checked {
-    border-color: #B69453;
-
     &:before {
       opacity: 1;
+      pointer-events: all;
     }
   }
 }
@@ -251,6 +276,8 @@ export default {
   position: relative;
   overflow: hidden;
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
 
   &.active {
     max-height: none;
@@ -288,6 +315,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  padding: 0;
 
   li {
     position: relative;
@@ -313,7 +341,7 @@ export default {
   height: 40px;
   display: flex;
   background: #ffffff;
-  z-index: 200;
+  z-index: 99;
   left: 0;
   width: 100%;
 
@@ -389,5 +417,91 @@ export default {
       }
     }
   }
+}
+
+::v-deep {
+  .v-messages {
+    opacity: 0;
+    height: 0;
+    min-height: 0;
+  }
+
+  .v-input__slot {
+    margin-bottom: 0 !important;
+  }
+
+  .v-slider__thumb-label {
+    width: 50px !important;
+    height: 50px !important;
+    @media(max-width: 767px) {
+      font-size: 10px;
+      width: 36px !important;
+      height: 36px !important;
+    }
+  }
+
+  .v-slider--horizontal {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .v-input__slot {
+    flex-direction: column-reverse;
+    align-items: inherit;
+  }
+
+  .v-input {
+    margin-right: 55px;
+    @media(max-width: 767px) {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 50px
+    }
+  }
+
+  .v-card__text {
+    padding: 16px 24px !important;
+  }
+
+  .v-sheet.v-card {
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+
+    &>.butt {
+      min-width: 220px;
+      margin: 0 auto;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      height: 50px;
+      background: #B69453;
+      text-transform: uppercase;
+      z-index: 1;
+
+      &:after,
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  .v-btn {
+    z-index: 1;
+  }
+}
+
+.result-empty {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  margin: 30px 0;
+}
+
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
 }
 </style>
