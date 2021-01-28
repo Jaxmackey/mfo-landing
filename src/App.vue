@@ -12,9 +12,7 @@
       />
       <v-btn
           class="butt-order"
-          v-bind="attrs"
-          v-on="on"
-          v-show="chooseItems.length > 0 && !dialog"
+          v-show="chooseItems.length > 0 && !dialog || chooseItems.length > 0 && showMore === true"
           color="#00cc1b"
           @click="dialog = true"
         >
@@ -261,7 +259,8 @@ export default {
       },
       dialog: false,
       orderBtn: false,
-      snackbar: false
+      snackbar: false,
+      showMore: false
     }
   },
   methods: {
@@ -270,6 +269,7 @@ export default {
       this.chooseItems = someData.chooseItems
       this.orderInfo.sum = someData.sum
       this.orderInfo.period = someData.period
+      this.showMore = someData.showMore
     },
     clear () {
       this.$v.$reset()

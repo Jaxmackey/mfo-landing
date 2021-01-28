@@ -78,6 +78,7 @@
             </ul>
           </div>
         </div>
+        <div class="butt" @click="showMore = false; setChooseItems(moreInfo, $event);">выбрать</div>
       </v-card>
     </v-dialog>
   </div>
@@ -132,6 +133,9 @@ export default {
     setInfo (info) {
       this.showMore = true
       this.moreInfo = info
+      this.$emit('updateParent', {
+        showMore: true
+      })
     },
     filterItems () {
       this.itemsNew = this.items.filter((item) => {
