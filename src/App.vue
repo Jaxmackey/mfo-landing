@@ -10,23 +10,22 @@
         :items = items
         @updateParent="onUpdateSalary"
       />
+      <v-btn
+          class="butt-order"
+          v-bind="attrs"
+          v-on="on"
+          v-show="chooseItems.length > 0 && !dialog"
+          color="#00cc1b"
+          @click="dialog = true"
+        >
+          Oформить заявку
+        </v-btn>
     </main>
     <v-dialog
       v-model="dialog"
       persistent
       max-width="600px"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          class="butt butt--fixed"
-          v-bind="attrs"
-          v-on="on"
-          v-show="chooseItems.length > 0 && !dialog"
-          color="#00cc1b"
-        >
-          Oформить заявку
-        </v-btn>
-      </template>
       <v-card>
         <v-card-title>
           <span class="headline">Введите ваши данные</span>
@@ -320,4 +319,23 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import './assets/scss/base';
+
+.butt-order {
+  max-width: 300px;
+  font-size: 18px !important;
+  height: 50px !important;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  border-radius: 0;
+  color: #fff !important;
+  z-index: 999999;
+  @media(max-width: 991px) {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+}
 </style>

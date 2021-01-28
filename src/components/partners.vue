@@ -3,38 +3,32 @@
     <div class="container">
       <h2>Наши <span>партнёры</span></h2>
       <form class="filter">
-        <v-row>
-          <v-col cols="12" sm="6">
-            <v-slider
-              v-model="sum"
-              min="500"
-              max="100000"
-              step="500"
-              label="Сумма займа, руб."
-              thumb-label="always"
-            />
-          </v-col>
-          <v-col cols="12" sm="6">
-            <v-slider
-              v-model="period"
-              min="1"
-              max="365"
-              label="Срок займа, дней"
-              thumb-label="always"
-            />
-          </v-col>
-          <v-col cols="12">
-            <div class="butt" @click="filterItems();"><span>Найти</span></div>
-          </v-col>
-        </v-row>
+        <v-slider
+          v-model="sum"
+          min="500"
+          max="100000"
+          step="500"
+          label="Сумма займа, руб."
+          thumb-label="always"
+        />
+        <v-slider
+          v-model="period"
+          min="1"
+          max="365"
+          label="Срок займа, дней"
+          thumb-label="always"
+        />
+        <div class="butt" @click="filterItems();"><span>Найти</span></div>
       </form>
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
         <div class="partners__item" v-for="(item, i) in itemsNew" :key="i">
           <div class="partners__logo">
             <img :src="getImgUrl(item.NameImageLogo)" alt="">
           </div>
-          <div class="partners__title" v-if="item.Title">{{ item.Title }}</div>
-          <div class="partners__text" v-if="item.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+          <div class="partners__descr">
+            <div class="partners__title" v-if="item.Title">{{ item.Title }}</div>
+            <div class="partners__text" v-if="item.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+          </div>
           <div class="partners__actions">
             <div @click="setInfo(item);">подробнее</div>
             <div @click="setChooseItems(item, $event);">выбрать</div>
@@ -151,14 +145,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
 .partners {
   border-top: 1px solid #B69453;
-  background: rgba(236, 224, 193, 0.23);
+  background:rgba(231, 231, 231, 0.38);
   padding: 80px 0;
 
   @media (max-width: 991px) {
     padding: 40px 0;
   }
+}
+
+.partners__descr {
+  padding: 0 20px;
 }
 
 .partners__wrapper {
@@ -179,7 +184,21 @@ export default {
   position: relative;
   border: 1px solid rgba(88, 87, 87, 0.23);
   transition: .3s;
-  min-height: 350px;
+  min-height: 250px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    background: url("../assets/check.svg") no-repeat;
+    background-size: contain;
+    transition: .3s;
+    opacity: 0;
+  }
 
   @media(max-width: 1199px) {
     width: calc(33.33% - 24px);
@@ -205,8 +224,11 @@ export default {
   }
 
   &.checked {
-    border-color: rgba(35, 148, 1, .23);
-    box-shadow: 0px 1px 15px 5px rgba(35, 148, 1, .23);
+    border-color: #B69453;
+
+    &:before {
+      opacity: 1;
+    }
   }
 }
 
