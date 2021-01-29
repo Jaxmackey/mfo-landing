@@ -10,6 +10,7 @@
           step="500"
           label="Сумма займа, руб."
           thumb-label="always"
+          @change="onChangeSlider($event)"
         />
         <v-slider
           v-model="period"
@@ -17,8 +18,9 @@
           max="365"
           label="Срок займа, дней"
           thumb-label="always"
+          @change="onChangeSlider($event)"
         />
-        <div class="butt butt--white" @click="filterItems();"><span>Найти</span></div>
+        <div class="butt butt--white" @click="filterItems(); sendTarget();"><span>Найти</span></div>
       </form>
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
         <div :class="item.Choose ? 'partners__item checked' : 'partners__item'" v-for="(item, i) in itemsNew" :key="i">
@@ -100,6 +102,13 @@ export default {
     }
   },
   methods: {
+    onChangeSlider (event) {
+      this.itemsNew = []
+    },
+    sendTarget (target) {
+      console.log(this.$metrika)
+      this.$metrika.reachGoal('ClickFindBtn')
+    },
     getImgUrl (pic) {
       return require(`@/assets/images/mfo-logos/${pic}.png`)
     },

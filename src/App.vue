@@ -14,7 +14,7 @@
         class="butt-order"
         v-if="chooseItems.length > 0 && !dialog"
         color="#00cc1b"
-        @click="dialog = true"
+        @click="dialog = true; reachGoal('MakeOrderGreenBtn');"
       >
         Oформить заявку
       </v-btn>
@@ -259,6 +259,9 @@ export default {
     }
   },
   methods: {
+    reachGoal (target) {
+      this.$metrika.reachGoal(target)
+    },
     onUpdateSalary (someData) {
       this.orderBtn = someData.orderBtn
       this.chooseItems = someData.chooseItems
@@ -298,7 +301,7 @@ export default {
           }
         })
         .then(response => {
-          console.log(response)
+          this.reachGoal('SendOrder')
           this.snackbar = true
           this.dialog = false
         })
