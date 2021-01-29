@@ -23,6 +23,13 @@
       v-model="dialog"
       max-width="600px"
     >
+    <v-btn
+      icon
+      @click="dialog = false"
+      class="modal-close"
+    >
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
       <v-card>
         <v-card-title>
           <span class="headline">Введите ваши данные</span>
@@ -176,16 +183,17 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
+            <!-- <v-btn
               @click="dialog=false"
             >
               Закрыть
-            </v-btn>
+            </v-btn> -->
             <v-btn
               color="#00cc1b"
               type="submit"
               @click="sendOrder"
               :disabled="invalid"
+              class="butt butt--white"
             >
               Отправить
             </v-btn>

@@ -77,7 +77,7 @@
             </ul>
           </div>
         </div>
-        <div class="butt" @click="showMore = false; setChooseItems(moreInfo, $event);">{{ moreInfo.Choose ? 'отменить' : 'выбрать' }}</div>
+        <div class="butt butt--white" @click="showMore = false; setChooseItems(moreInfo, $event);">{{ moreInfo.Choose ? 'отменить' : 'выбрать' }}</div>
       </v-card>
     </v-dialog>
   </div>
