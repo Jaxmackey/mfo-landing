@@ -27,7 +27,8 @@
     "MinMany": 1000,
     "MaxMany": 15000,
     "MinDay": 7,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4946",
@@ -53,7 +54,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 7,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4472",
@@ -78,7 +80,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 7,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4412",
@@ -116,7 +119,8 @@
     "MinMany": 7000,
     "MaxMany": 30000,
     "MinDay": 1,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5141",
@@ -172,7 +176,8 @@
     "MinMany": 1000,
     "MaxMany": 100000,
     "MinDay": 1,
-    "MaxDay": 360
+    "MaxDay": 360,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4470",
@@ -198,7 +203,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 7,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4452",
@@ -221,7 +227,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 1,
-    "MaxDay": 301
+    "MaxDay": 301,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4788",
@@ -258,7 +265,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 1,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5080",
@@ -287,7 +295,8 @@
     "MinMany": 3000,
     "MaxMany": 100000,
     "MinDay": 1,
-    "MaxDay": 365
+    "MaxDay": 365,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5228",
@@ -316,7 +325,8 @@
     "MinMany": 3000,
     "MaxMany": 100000,
     "MinDay": 1,
-    "MaxDay": 365
+    "MaxDay": 365,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5175",
@@ -345,7 +355,8 @@
     "MinMany": 1000,
     "MaxMany": 100000,
     "MinDay": 1,
-    "MaxDay": 365
+    "MaxDay": 365,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4821",
@@ -373,7 +384,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 1,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5178",
@@ -405,7 +417,8 @@
     "MinMany": 2000,
     "MaxMany": 70000,
     "MinDay": 10,
-    "MaxDay": 168
+    "MaxDay": 168,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5187",
@@ -433,7 +446,8 @@
     "MinMany": 2000,
     "MaxMany": 70000,
     "MinDay": 10,
-    "MaxDay": 168
+    "MaxDay": 168,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5046",
@@ -462,7 +476,8 @@
     "MinMany": 3000,
     "MaxMany": 100000,
     "MinDay": 1,
-    "MaxDay": 365
+    "MaxDay": 365,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4468",
@@ -497,7 +512,8 @@
     "MinMany": 3000,
     "MaxMany": 30000,
     "MinDay": 7,
-    "MaxDay": 31
+    "MaxDay": 31,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4781",
@@ -512,7 +528,8 @@
     "MinMany": 3000,
     "MaxMany": 7000,
     "MinDay": 1,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4730",
@@ -545,7 +562,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 1,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5024",
@@ -577,7 +595,8 @@
     "MinMany": 1500,
     "MaxMany": 80000,
     "MinDay": 5,
-    "MaxDay": 126
+    "MaxDay": 126,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5233",
@@ -598,7 +617,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 1,
-    "MaxDay": 32
+    "MaxDay": 32,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5220",
@@ -628,7 +648,8 @@
     "MinMany": 500,
     "MaxMany": 30000,
     "MinDay": 6,
-    "MaxDay": 60
+    "MaxDay": 60,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4714",
@@ -661,7 +682,8 @@
     "MinMany": 1000,
     "MaxMany": 30000,
     "MinDay": 1,
-    "MaxDay": 30
+    "MaxDay": 30,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/5197",
@@ -694,7 +716,8 @@
     "MinMany": 3000,
     "MaxMany": 100000,
     "MinDay": 3,
-    "MaxDay": 360
+    "MaxDay": 360,
+    "Choose": false
   },
   {
     "MainUrl": "https://my.leadgid.ru/affiliate/offer/4926",
@@ -726,6 +749,7 @@
     "MinMany": 1500,
     "MaxMany": 80000,
     "MinDay": 5,
-    "MaxDay": 126
+    "MaxDay": 126,
+    "Choose": false
   }
 ]

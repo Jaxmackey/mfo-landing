@@ -21,7 +21,7 @@
         <div class="butt butt--white" @click="filterItems();"><span>Найти</span></div>
       </form>
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
-        <div class="partners__item" v-for="(item, i) in itemsNew" :key="i">
+        <div :class="item.Choose ? 'partners__item checked' : 'partners__item'" v-for="(item, i) in itemsNew" :key="i">
           <div class="partners__logo">
             <img :src="getImgUrl(item.NameImageLogo)" alt="">
           </div>
@@ -31,7 +31,7 @@
           </div>
           <div class="partners__actions">
             <div @click="setInfo(item);">подробнее</div>
-            <div @click="setChooseItems(item, $event);">выбрать</div>
+            <div @click="setChooseItems(item);">{{ item.Choose ? 'отменить' : 'выбрать' }}</div>
           </div>
         </div>
       </div>
@@ -39,7 +39,6 @@
     </div>
     <v-dialog
       v-model="showMore"
-      persistent
       max-width="800px"
     >
     <v-btn
@@ -50,7 +49,6 @@
       <v-icon>mdi-close</v-icon>
     </v-btn>
       <v-card v-if="moreInfo">
-
         <div class="partners__info">
           <div class="partners__title" v-if="moreInfo.Title">{{ moreInfo.Title }}</div>
           <div class="partners__text" v-if="moreInfo.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
@@ -79,7 +77,7 @@
             </ul>
           </div>
         </div>
-        <div class="butt" @click="showMore = false; setChooseItems(moreInfo, $event);">выбрать</div>
+        <div class="butt" @click="showMore = false; setChooseItems(moreInfo, $event);">{{ moreInfo.Choose ? 'отменить' : 'выбрать' }}</div>
       </v-card>
     </v-dialog>
   </div>
@@ -105,14 +103,14 @@ export default {
     getImgUrl (pic) {
       return require(`@/assets/images/mfo-logos/${pic}.png`)
     },
-    setChooseItems (item, e) {
+    setChooseItems (item) {
       if (this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)) {
         const delItem = this.chooseItems.find(i => i.NameImageLogo === item.NameImageLogo)
         this.chooseItems.splice(this.chooseItems.indexOf(delItem), 1)
-        e.target.closest('.partners__item').classList.remove('checked')
+        item.Choose = false
       } else {
         this.chooseItems.push(item)
-        e.target.closest('.partners__item').classList.add('checked')
+        item.Choose = true
       }
       if (this.chooseItems.length > 0) {
         this.$emit('updateParent', {
@@ -128,15 +126,10 @@ export default {
         sum: this.sum,
         period: this.period
       })
-      const btnText = e.target.innerHTML === 'выбрать' ? 'отменить' : 'выбрать'
-      e.target.innerHTML = btnText
     },
     setInfo (info) {
-      this.showMore = true
       this.moreInfo = info
-      this.$emit('updateParent', {
-        showMore: true
-      })
+      this.showMore = true
     },
     filterItems () {
       this.itemsNew = this.items.filter((item) => {

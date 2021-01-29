@@ -11,17 +11,16 @@
         @updateParent="onUpdateSalary"
       />
       <v-btn
-          class="butt-order"
-          v-show="chooseItems.length > 0 && !dialog || chooseItems.length > 0 && showMore === true"
-          color="#00cc1b"
-          @click="dialog = true"
-        >
-          Oформить заявку
-        </v-btn>
+        class="butt-order"
+        v-if="chooseItems.length > 0 && !dialog"
+        color="#00cc1b"
+        @click="dialog = true"
+      >
+        Oформить заявку
+      </v-btn>
     </main>
     <v-dialog
       v-model="dialog"
-      persistent
       max-width="600px"
     >
       <v-card>
@@ -41,7 +40,6 @@
                     type="number"
                     disabled
                     v-model="orderInfo.sum"
-                    :error-messages="errors"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6">
@@ -50,7 +48,6 @@
                     type="number"
                     disabled
                     v-model="orderInfo.period"
-                    :error-messages="errors"
                   ></v-text-field>
                 </v-col>
                 <v-col
@@ -165,7 +162,6 @@
                   </ul>
                 </v-col>
                 <validation-provider
-                  v-slot="{ errors }"
                   rules="required"
                   name="personalData"
                 >
@@ -173,7 +169,6 @@
                     v-model="orderInfo.personalData"
                     label="Нажимая кнопку 'Отправить' Вы даёте свое согласие на обработку введенной персональной информации"
                     required
-                    :error-messages="errors"
                   ></v-checkbox>
                 </validation-provider>
               </v-row>
@@ -259,8 +254,7 @@ export default {
       },
       dialog: false,
       orderBtn: false,
-      snackbar: false,
-      showMore: false
+      snackbar: false
     }
   },
   methods: {
@@ -269,7 +263,6 @@ export default {
       this.chooseItems = someData.chooseItems
       this.orderInfo.sum = someData.sum
       this.orderInfo.period = someData.period
-      this.showMore = someData.showMore
     },
     clear () {
       this.$v.$reset()
@@ -306,10 +299,11 @@ export default {
         .then(response => {
           console.log(response)
           this.snackbar = true
+          this.dialog = false
         })
         .catch(error => {
           console.log(error)
-          this.false = true
+          this.dialog = false
         })
     }
   }
@@ -329,7 +323,7 @@ export default {
   bottom: 50px;
   border-radius: 0;
   color: #fff !important;
-  z-index: 999999;
+  z-index: 130;
   @media(max-width: 991px) {
     bottom: 0;
     left: 0;
