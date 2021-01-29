@@ -41,13 +41,13 @@
       v-model="showMore"
       max-width="800px"
     >
-    <v-btn
-      icon
-      @click="showMore = false"
-      class="modal-close"
-    >
-      <v-icon>mdi-close</v-icon>
-    </v-btn>
+      <v-btn
+        icon
+        @click="showMore = false"
+        class="modal-close"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
       <v-card v-if="moreInfo">
         <div class="partners__info">
           <div class="partners__title" v-if="moreInfo.Title">{{ moreInfo.Title }}</div>
@@ -490,11 +490,5 @@ export default {
   font-weight: 600;
   font-size: 32px;
   margin: 30px 0;
-}
-
-.modal-close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
 }
 </style>

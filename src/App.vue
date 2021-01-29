@@ -182,21 +182,14 @@
             </form>
           </v-card-text>
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <!-- <v-btn
-              @click="dialog=false"
-            >
-              Закрыть
-            </v-btn> -->
-            <v-btn
-              color="#00cc1b"
+            <button
               type="submit"
-              @click="sendOrder"
               :disabled="invalid"
-              class="butt butt--white"
+              class="butt butt-send-order"
+              @click="sendOrder"
             >
               Отправить
-            </v-btn>
+            </button>
           </v-card-actions>
         </validation-observer>
       </v-card>
@@ -338,6 +331,26 @@ export default {
     right: 0;
     max-width: 100%;
     width: 100%;
+  }
+}
+
+.butt-send-order {
+  min-width: 220px;
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  height: 50px;
+  background: #B69453;
+  text-transform: uppercase;
+  z-index: 1;
+
+  &:after,
+  &:before {
+    display: none;
+  }
+  &:disabled {
+    background: gray;
+    cursor: default;
   }
 }
 </style>

@@ -6,7 +6,7 @@
       <a
         href="#"
         class="butt"
-        @click="$vuetify.goTo('.partners', options)"
+        @click="$vuetify.goTo('.partners');"
       >
         <span>Оформить зявку</span>
       </a>
