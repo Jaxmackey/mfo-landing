@@ -6,7 +6,7 @@
       <a
         href="#"
         class="butt"
-        @click="reachGoal(); $vuetify.goTo('.partners');"
+        @click="$vuetify.goTo('.partners'); reachGoal('СlickMakeRequestHeader');"
       >
         <span>Оформить зявку</span>
       </a>
@@ -17,8 +17,9 @@
 <script>
 export default {
   methods: {
-    reachGoal () {
-      this.$metrika.reachGoal('СlickMakeRequestHeader')
+    reachGoal (target) {
+      console.log(target)
+      this.$metrika.reachGoal(target)
     }
   }
 }

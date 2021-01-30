@@ -260,6 +260,7 @@ export default {
   },
   methods: {
     reachGoal (target) {
+      console.log(target)
       this.$metrika.reachGoal(target)
     },
     onUpdateSalary (someData) {
@@ -281,6 +282,7 @@ export default {
       this.orderInfo.personalData = false
     },
     sendOrder () {
+      this.reachGoal('SendOrder')
       axios
         .post('http://194.58.120.164:8080/', {
           sum: parseInt(this.orderInfo.sum),
@@ -301,7 +303,6 @@ export default {
           }
         })
         .then(response => {
-          this.reachGoal('SendOrder')
           this.snackbar = true
           this.dialog = false
         })

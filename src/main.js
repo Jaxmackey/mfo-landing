@@ -8,7 +8,9 @@ Vue.use(VueYandexMetrika, {
   clickmap: true,
   trackLinks: true,
   accurateTrackBounce: true,
-  webvisor: true
+  webvisor: true,
+  scriptSrc: 'https://mc.yandex.ru/metrika/tag.js',
+  env: 'production'
 })
 
 Vue.config.productionTip = false

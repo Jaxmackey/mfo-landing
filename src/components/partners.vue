@@ -20,7 +20,7 @@
           thumb-label="always"
           @change="onChangeSlider($event)"
         />
-        <div class="butt butt--white" @click="filterItems(); sendTarget();"><span>Найти</span></div>
+        <div class="butt butt--white" @click="filterItems(); reachGoal('ClickFindBtn');"><span>Найти</span></div>
       </form>
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
         <div :class="item.Choose ? 'partners__item checked' : 'partners__item'" v-for="(item, i) in itemsNew" :key="i">
@@ -105,9 +105,8 @@ export default {
     onChangeSlider (event) {
       this.itemsNew = []
     },
-    sendTarget (target) {
-      console.log(this.$metrika)
-      this.$metrika.reachGoal('ClickFindBtn')
+    reachGoal (target) {
+      this.$metrika.reachGoal(target)
     },
     getImgUrl (pic) {
       return require(`@/assets/images/mfo-logos/${pic}.png`)
