@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import VueYandexMetrika from 'vue-yandex-metrika'
-import Blog from './components/blog'
+import Index from './pages/index'
+import Blog from './pages/blog'
 
 Vue.use(VueRouter)
 Vue.use(VueYandexMetrika, {
@@ -13,13 +14,13 @@ Vue.use(VueYandexMetrika, {
   accurateTrackBounce: true,
   webvisor: true,
   scriptSrc: 'https://mc.yandex.ru/metrika/tag.js',
-  env: 'production'
+  env: 'develop'
 })
 
 Vue.config.productionTip = false
 
 const routes = [
-  { path: '', component: App },
+  { path: '/', component: Index },
   { path: '/blog', component: Blog }
 ]
 
