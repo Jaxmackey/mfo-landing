@@ -28,7 +28,7 @@ const router = new VueRouter({
   routes
 })
 
-new Vue({
+export default () => new Vue({
   router,
   vuetify,
   render: h => h(App)
