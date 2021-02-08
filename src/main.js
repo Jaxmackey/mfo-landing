@@ -3,29 +3,31 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import VueYandexMetrika from 'vue-yandex-metrika'
-import Index from './pages/index'
-import Blog from './pages/blog'
+import index from './pages/index'
+import catalog from '@/pages/catalog'
+import blog from './pages/blog'
 
 Vue.use(VueRouter)
 Vue.use(VueYandexMetrika, {
   id: 71367445,
-  clickmap: true,
-  trackLinks: true,
-  accurateTrackBounce: true,
-  webvisor: true,
   scriptSrc: 'https://mc.yandex.ru/metrika/tag.js',
-  env: 'develop'
+  // env: 'production',
+  options: {
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true
+  }
 })
 
 Vue.config.productionTip = false
 
-const routes = [
-  { path: '/', component: Index },
-  { path: '/blog', component: Blog }
-]
-
 const router = new VueRouter({
-  routes
+  routes: [
+    { path: '/', component: index },
+    { path: '/catalog', component: catalog },
+    { path: '/blog', component: blog }
+  ]
 })
 
 new Vue({
