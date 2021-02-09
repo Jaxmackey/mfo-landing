@@ -1,13 +1,13 @@
 <template>
-  <Offer />
+  <Advantages />
 </template>
 
 <script>
-import Offer from '@/components/offer'
+import Advantages from '@/components/advantages'
 
 export default {
   components: {
-    Offer
+    Advantages
   }
 }
 </script>

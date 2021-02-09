@@ -23,13 +23,45 @@ export function createRouter () {
   return new VueRouter({
     mode: 'history',
     routes: [
-      { path: '/', component: () => import('./pages/index.vue') },
-      { path: '/catalog', component: () => import('./pages/catalog.vue') },
-      { path: '/blog', component: () => import('./pages/blog.vue') }
+      {
+        path: '/',
+        component: () => import('./pages/index.vue'),
+        meta: {
+          title: 'EZCASH - Главная'
+        }
+      },
+      {
+        path: '/catalog',
+        component: () => import('./pages/catalog.vue'),
+        meta: {
+          title: 'EZCASH - Микрозаймы'
+        }
+      },
+      {
+        path: '/blog',
+        component: () => import('./pages/blog.vue'),
+        meta: {
+          title: 'EZCASH - Блог'
+        }
+      },
+      {
+        path: '/about',
+        component: () => import('./pages/about.vue'),
+        meta: {
+          title: 'EZCASH - О нас'
+        }
+      }
     ]
   })
 }
 const router = createRouter()
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})
 
 new Vue({
   vuetify,

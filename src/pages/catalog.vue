@@ -1,35 +1,28 @@
 <template>
   <div>
-    <main>
-      <Offer />
-      <!-- блок Advantages съёбывает на страницу "О нас" -->
-      <!-- <div class="container">
-        <Advantages />
-      </div> -->
-      <Partners
-        :items = items
-        @updateParent="onUpdateSalary"
-      />
-      <v-btn
-        class="butt-order"
-        v-if="chooseItems.length > 0 && !dialog"
-        color="#00cc1b"
-        @click="dialog = true; reachGoal('MakeOrderGreenBtn');"
-      >
-        Oформить заявку
-      </v-btn>
-    </main>
+    <Partners
+      :items = items
+      @updateParent="onUpdateSalary"
+    />
+    <v-btn
+      class="butt-order"
+      v-if="chooseItems.length > 0 && !dialog"
+      color="#00cc1b"
+      @click="dialog = true; reachGoal('MakeOrderGreenBtn');"
+    >
+      Oформить заявку
+    </v-btn>
     <v-dialog
       v-model="dialog"
       max-width="600px"
     >
-    <v-btn
-      icon
-      @click="dialog = false"
-      class="modal-close"
-    >
-      <v-icon>mdi-close</v-icon>
-    </v-btn>
+      <v-btn
+        icon
+        @click="dialog = false"
+        class="modal-close"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
       <v-card>
         <v-card-title>
           <span class="headline">Введите ваши данные</span>
@@ -121,11 +114,11 @@
                   <validation-provider
                     v-slot="{ errors }"
                     name="Телефон"
-                    rules="required"
+                    rules="required|min:5"
                   >
                     <v-text-field
                       label="Телефон"
-                      type="tel"
+                      type="number"
                       required
                       v-model="orderInfo.phone"
                       :error-messages="errors"
@@ -205,10 +198,9 @@
 
 <script>
 import dataItems from '@/data'
-// import Advantages from '@/components/advantages'
 import Partners from '@/components/partners'
 import axios from 'axios'
-import { required, email } from 'vee-validate/dist/rules'
+import { required, email, min } from 'vee-validate/dist/rules'
 import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 import Footer from '@/components/footer'
 
@@ -224,9 +216,13 @@ extend('email', {
   message: 'Введите корректный email'
 })
 
+extend('min', {
+  ...min,
+  message: 'Необходимо ввести минимум 5 символов'
+})
+
 export default {
   components: {
-    // Advantages,
     Partners,
     ValidationProvider,
     ValidationObserver,

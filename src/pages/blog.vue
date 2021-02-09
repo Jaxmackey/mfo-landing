@@ -44,21 +44,41 @@
         </div>
       </div>
     </div>
-    <Pagination />
+    <div class="container">
+      <v-pagination
+        v-model="page"
+        :length="pages"
+      ></v-pagination>
+    </div>
     <Footer />
   </div>
 </template>
 
 <script>
+import dataItems from '@/data'
 import Footer from '@/components/footer'
 import Breadcrumbs from '@/components/breadcrumbs'
-import Pagination from '@/components/pagination'
 
 export default {
   components: {
     Footer,
-    Breadcrumbs,
-    Pagination
+    Breadcrumbs
+  },
+  data: () => {
+    return {
+      page: 1,
+      perPage: 8,
+      pages: null,
+      items: dataItems
+    }
+  },
+  mounted () {
+    this.pages = this.totalPages()
+  },
+  methods: {
+    totalPages () {
+      return parseInt(dataItems.length / this.perPage)
+    }
   }
 }
 </script>

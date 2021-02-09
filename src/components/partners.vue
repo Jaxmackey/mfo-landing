@@ -101,6 +101,9 @@ export default {
       moreInfo: null
     }
   },
+  mounted () {
+    this.itemsNew = this.items
+  },
   methods: {
     onChangeSlider (event) {
       this.itemsNew = []

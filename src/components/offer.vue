@@ -4,9 +4,9 @@
       <h1>Мы поможем получить деньги быстро</h1>
       <div class="offer__descr">Помогаем  выбрать заёмщика с наилучшими условиями. Вам ничего не нужно делать, просто оформите заявку у нас на сайте и ждите одобрения</div>
       <a
-        href="#"
+        href="/catalog"
         class="butt"
-        @click="$vuetify.goTo('.partners'); reachGoal('СlickMakeRequestHeader');"
+        @click="reachGoal('СlickMakeRequestHeader');"
       >
         <span>Оформить зявку</span>
       </a>
@@ -18,7 +18,6 @@
 export default {
   methods: {
     reachGoal (target) {
-      console.log(target)
       this.$metrika.reachGoal(target)
     }
   }

@@ -1,42 +1,44 @@
 <template>
-  <div class="advantages">
-    <h2>Кто может получить <span>деньги</span></h2>
-    <div class="advantages__wrapper">
-      <div class="advantages__item">
-        <div class="advantages__icon">
-          <img src="../assets/adv-1.svg" alt="">
+  <div class="container">
+    <div class="advantages">
+      <h2>Кто может получить <span>деньги</span></h2>
+      <div class="advantages__wrapper">
+        <div class="advantages__item">
+          <div class="advantages__icon">
+            <img src="../assets/adv-1.svg" alt="">
+          </div>
+          <div class="advantages__text">студенты</div>
         </div>
-        <div class="advantages__text">студенты</div>
-      </div>
-      <div class="advantages__item">
-        <div class="advantages__icon">
-          <img src="../assets/adv-2.svg" alt="">
+        <div class="advantages__item">
+          <div class="advantages__icon">
+            <img src="../assets/adv-2.svg" alt="">
+          </div>
+          <div class="advantages__text">БЕЗ ОФИЦИАЛЬНОГО МЕСТА РАБОТЫ</div>
         </div>
-        <div class="advantages__text">БЕЗ ОФИЦИАЛЬНОГО МЕСТА РАБОТЫ</div>
-      </div>
-      <div class="advantages__item">
-        <div class="advantages__icon">
-          <img src="../assets/adv-3.svg" alt="">
+        <div class="advantages__item">
+          <div class="advantages__icon">
+            <img src="../assets/adv-3.svg" alt="">
+          </div>
+          <div class="advantages__text">ИМЕЮЩИМ СУДИМОСТИ</div>
         </div>
-        <div class="advantages__text">ИМЕЮЩИМ СУДИМОСТИ</div>
-      </div>
-      <div class="advantages__item">
-        <div class="advantages__icon">
-          <img src="../assets/adv-4.svg" alt="">
+        <div class="advantages__item">
+          <div class="advantages__icon">
+            <img src="../assets/adv-4.svg" alt="">
+          </div>
+          <div class="advantages__text">ПЕНСИОНЕРАМ</div>
         </div>
-        <div class="advantages__text">ПЕНСИОНЕРАМ</div>
-      </div>
-      <div class="advantages__item">
-        <div class="advantages__icon">
-          <img src="../assets/adv-5.svg" alt="">
+        <div class="advantages__item">
+          <div class="advantages__icon">
+            <img src="../assets/adv-5.svg" alt="">
+          </div>
+          <div class="advantages__text">С ПЛОХОЙ КРЕДИТНОЙ ИСТОРИЕЙ</div>
         </div>
-        <div class="advantages__text">С ПЛОХОЙ КРЕДИТНОЙ ИСТОРИЕЙ</div>
-      </div>
-      <div class="advantages__item">
-        <div class="advantages__icon">
-          <img src="../assets/adv-6.svg" alt="">
+        <div class="advantages__item">
+          <div class="advantages__icon">
+            <img src="../assets/adv-6.svg" alt="">
+          </div>
+          <div class="advantages__text">НАХОДЯЩИМСЯ В ДЕКРЕТЕ</div>
         </div>
-        <div class="advantages__text">НАХОДЯЩИМСЯ В ДЕКРЕТЕ</div>
       </div>
     </div>
   </div>

@@ -1,13 +1,25 @@
 <template>
   <div class="container">
-    <div class="pagination">
-
-    </div>
+    <v-pagination
+      v-model="page"
+      :length="total"
+    ></v-pagination>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    page: {
+      type: Number,
+      default: 1
+    },
+    total: {
+      type: Number,
+      default: 1
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

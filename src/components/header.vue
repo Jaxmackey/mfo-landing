@@ -5,10 +5,10 @@
         <img src="../assets/logo.svg" alt="logo">
       </a>
       <div
-        class="mobile-nav"
+        :class="'mobile-nav' + (showMenu ? ' active' : '')"
       >
         <nav class="nav">
-          <a href="#" class="nav__link">О нас</a>
+          <a href="/about" class="nav__link">О нас</a>
           <a href="/catalog" class="nav__link">Микрозаймы</a>
           <a href="/blog" class="nav__link">Блог</a>
         </nav>
@@ -66,7 +66,7 @@
       </div>
 
       <a href="mailTo:somemail@gmail.com" class="link-mail">somemail@gmail.com</a>
-      <div class="hamburger">
+      <div class="hamburger" @click="showMenu = !showMenu">
         <span></span>
         <span></span>
         <span></span>
@@ -77,7 +77,11 @@
 
 <script>
 export default {
-
+  data: () => {
+    return {
+      showMenu: false
+    }
+  }
 }
 </script>
 
