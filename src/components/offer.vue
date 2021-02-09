@@ -33,8 +33,12 @@ export default {
 
   .container {
     justify-content: center;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 100px);
     align-items: flex-start;
+
+    @media(max-width: 1259px) {
+      min-height: calc(100vh - 80px);
+    }
   }
 }
 

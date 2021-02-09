@@ -17,6 +17,7 @@ export default {}
 .footer {
   background: #303030;
   padding: 20px 0;
+  margin-top: auto;
 
   .container {
     flex-direction: row;

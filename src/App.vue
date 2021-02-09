@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <main>
+    <main class="wrapper">
       <Header />
       <router-view />
     </main>
@@ -58,6 +58,14 @@ export default {
   &:disabled {
     background: gray;
     cursor: default;
+  }
+}
+
+.wrapper {
+  padding-top: 100px;
+
+  @media(max-width: 1259px) {
+    padding-top: 80px;
   }
 }
 </style>

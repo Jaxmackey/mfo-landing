@@ -2,9 +2,10 @@
   <div>
     <main>
       <Offer />
-      <div class="container">
+      <!-- блок Advantages съёбывает на страницу "О нас" -->
+      <!-- <div class="container">
         <Advantages />
-      </div>
+      </div> -->
       <Partners
         :items = items
         @updateParent="onUpdateSalary"
@@ -204,7 +205,7 @@
 
 <script>
 import dataItems from '@/data'
-import Advantages from '@/components/advantages'
+// import Advantages from '@/components/advantages'
 import Partners from '@/components/partners'
 import axios from 'axios'
 import { required, email } from 'vee-validate/dist/rules'
@@ -225,7 +226,7 @@ extend('email', {
 
 export default {
   components: {
-    Advantages,
+    // Advantages,
     Partners,
     ValidationProvider,
     ValidationObserver,
