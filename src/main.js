@@ -36,21 +36,21 @@ export function createRouter () {
         meta: {
           title: 'EZCASH - Микрозаймы'
         }
-      },
-      {
-        path: '/blog',
-        component: () => import('./pages/blog.vue'),
-        meta: {
-          title: 'EZCASH - Блог'
-        }
-      },
-      {
-        path: '/about',
-        component: () => import('./pages/about.vue'),
-        meta: {
-          title: 'EZCASH - О нас'
-        }
       }
+      // {
+      //   path: '/blog',
+      //   component: () => import('./pages/blog.vue'),
+      //   meta: {
+      //     title: 'EZCASH - Блог'
+      //   }
+      // },
+      // {
+      //   path: '/about',
+      //   component: () => import('./pages/about.vue'),
+      //   meta: {
+      //     title: 'EZCASH - О нас'
+      //   }
+      // }
     ]
   })
 }

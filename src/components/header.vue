@@ -8,9 +8,9 @@
         :class="'mobile-nav' + (showMenu ? ' active' : '')"
       >
         <nav class="nav">
-          <a href="/about" class="nav__link">О нас</a>
+          <!-- <a href="/about" class="nav__link">О нас</a> -->
           <a href="/catalog" class="nav__link">Микрозаймы</a>
-          <a href="/blog" class="nav__link">Блог</a>
+          <!-- <a href="/blog" class="nav__link">Блог</a> -->
         </nav>
         <div class="social">
           <a href="#" class="social__link">

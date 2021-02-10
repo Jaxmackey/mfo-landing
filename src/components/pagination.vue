@@ -3,6 +3,7 @@
     <v-pagination
       v-model="page"
       :length="total"
+      @input="changePage"
     ></v-pagination>
   </div>
 </template>
@@ -17,6 +18,10 @@ export default {
     total: {
       type: Number,
       default: 1
+    },
+    changePage: {
+      type: Function,
+      default: null
     }
   }
 }

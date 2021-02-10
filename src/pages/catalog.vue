@@ -251,7 +251,6 @@ export default {
   },
   methods: {
     reachGoal (target) {
-      console.log(target)
       this.$metrika.reachGoal(target)
     },
     onUpdateSalary (someData) {
@@ -273,34 +272,38 @@ export default {
       this.orderInfo.personalData = false
     },
     sendOrder () {
-      this.reachGoal('SendOrder')
-      axios
-        .post('http://194.58.120.164:8080/', {
-          sum: parseInt(this.orderInfo.sum),
-          period: this.orderInfo.period,
-          firstName: this.orderInfo.firstName,
-          lastName: this.orderInfo.lastName,
-          patronymic: this.orderInfo.patronymic,
-          email: this.orderInfo.email,
-          phone: parseInt(this.orderInfo.phone),
-          country: this.orderInfo.country,
-          city: this.orderInfo.city,
-          personalData: this.orderInfo.personalData,
-          chooseItems: this.chooseItems.map((item) => item?.Title)
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(response => {
-          this.snackbar = true
-          this.dialog = false
-        })
-        .catch(error => {
-          console.log(error)
-          this.dialog = false
-        })
+      this.$validator.validate().then(valid => {
+        if (valid) {
+          axios
+            .post('http://194.58.120.164:8080/', {
+              sum: parseInt(this.orderInfo.sum),
+              period: this.orderInfo.period,
+              firstName: this.orderInfo.firstName,
+              lastName: this.orderInfo.lastName,
+              patronymic: this.orderInfo.patronymic,
+              email: this.orderInfo.email,
+              phone: parseInt(this.orderInfo.phone),
+              country: this.orderInfo.country,
+              city: this.orderInfo.city,
+              personalData: this.orderInfo.personalData,
+              chooseItems: this.chooseItems.map((item) => item?.Title)
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => {
+              this.reachGoal('SendOrder')
+              this.snackbar = true
+              this.dialog = false
+            })
+            .catch(error => {
+              console.log(error)
+              this.dialog = false
+            })
+        }
+      })
     }
   }
 }

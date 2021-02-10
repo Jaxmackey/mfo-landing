@@ -48,6 +48,7 @@
       <v-pagination
         v-model="page"
         :length="pages"
+        :changePage="changePage()"
       ></v-pagination>
     </div>
     <Footer />
@@ -56,6 +57,7 @@
 
 <script>
 import dataItems from '@/data'
+import axios from 'axios'
 import Footer from '@/components/footer'
 import Breadcrumbs from '@/components/breadcrumbs'
 
@@ -76,8 +78,13 @@ export default {
     this.pages = this.totalPages()
   },
   methods: {
-    totalPages () {
-      return parseInt(dataItems.length / this.perPage)
+    changePage () {
+      axios.get('test')
+        .then(response => response)
+        .catch(error => {
+          console.log(error)
+          this.dialog = false
+        })
     }
   }
 }
