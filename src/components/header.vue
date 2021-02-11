@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <a href="mailTo:somemail@gmail.com" class="link-mail">somemail@gmail.com</a>
+      <a href="mailTo:ezcash.official@gmail.com" class="link-mail">ezcash.official@gmail.com</a>
       <div class="hamburger" @click="showMenu = !showMenu">
         <span></span>
         <span></span>
@@ -92,7 +92,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 101;
 
   .container {
     height: 100px;

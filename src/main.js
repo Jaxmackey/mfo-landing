@@ -8,12 +8,12 @@ Vue.use(VueRouter)
 Vue.use(VueYandexMetrika, {
   id: 71367445,
   scriptSrc: 'https://mc.yandex.ru/metrika/tag.js',
+  // env: 'production',
   options: {
     clickmap: true,
     trackLinks: true,
     accurateTrackBounce: true,
-    webvisor: true,
-    env: 'dev'
+    webvisor: true
   }
 })
 
@@ -36,14 +36,14 @@ export function createRouter () {
         meta: {
           title: 'EZCASH - Микрозаймы'
         }
+      },
+      {
+        path: '/blog',
+        component: () => import('./pages/blog.vue'),
+        meta: {
+          title: 'EZCASH - Блог'
+        }
       }
-      // {
-      //   path: '/blog',
-      //   component: () => import('./pages/blog.vue'),
-      //   meta: {
-      //     title: 'EZCASH - Блог'
-      //   }
-      // },
       // {
       //   path: '/about',
       //   component: () => import('./pages/about.vue'),

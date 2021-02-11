@@ -5,40 +5,13 @@
       <div class="blog">
         <div class="title">Блог</div>
         <div class="blog__wrapper">
-          <div class="blog__item blog__item--big">
-            <img src="../assets/images/blog-1.png" alt="">
-            <div class="blog__views">22</div>
+          <div v-for="(item, i) in items" :key="i" :class="'blog__item' + (i === 0 || i === 3 ? ' blog__item--big' : '')">
+            <img :src="item.Img" alt="">
+            <div class="blog__views">{{ item.Views }}</div>
             <div class="blog__info">
-              <div class="blog__title">История успеха</div>
-              <div class="blog__date">20.12.2021</div>
-              <div class="blog__preview">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </div>
-            </div>
-          </div>
-          <div class="blog__item">
-            <img src="../assets/images/blog-2.png" alt="">
-            <div class="blog__views">22</div>
-            <div class="blog__info">
-              <div class="blog__title">История успеха</div>
-              <div class="blog__date">20.12.2021</div>
-              <div class="blog__preview">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </div>
-            </div>
-          </div>
-          <div class="blog__item">
-            <img src="../assets/images/blog-3.png" alt="">
-            <div class="blog__views">22</div>
-            <div class="blog__info">
-              <div class="blog__title">История успеха</div>
-              <div class="blog__date">20.12.2021</div>
-              <div class="blog__preview">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </div>
-            </div>
-          </div>
-          <div class="blog__item blog__item--big">
-            <img src="../assets/images/blog-4.png" alt="">
-            <div class="blog__views">22</div>
-            <div class="blog__info">
-              <div class="blog__title">История успеха</div>
-              <div class="blog__date">20.12.2021</div>
-              <div class="blog__preview">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </div>
+              <div class="blog__title">{{ item.Title }}</div>
+              <div class="blog__date">{{ new Date(item.DateAt).toLocaleDateString() }}</div>
+              <div class="blog__preview">{{ item.MinText }}</div>
             </div>
           </div>
         </div>
@@ -48,7 +21,7 @@
       <v-pagination
         v-model="page"
         :length="pages"
-        :changePage="changePage()"
+        @input="changePage(page)"
       ></v-pagination>
     </div>
     <Footer />
@@ -56,7 +29,6 @@
 </template>
 
 <script>
-import dataItems from '@/data'
 import axios from 'axios'
 import Footer from '@/components/footer'
 import Breadcrumbs from '@/components/breadcrumbs'
@@ -69,18 +41,39 @@ export default {
   data: () => {
     return {
       page: 1,
-      perPage: 8,
+      perPage: null,
       pages: null,
-      items: dataItems
+      items: null
     }
   },
   mounted () {
-    this.pages = this.totalPages()
+    this.setPagination()
   },
   methods: {
-    changePage () {
-      axios.get('test')
-        .then(response => response)
+    setPagination () {
+      axios.get('https://ez-cash.ru/paginationController.php')
+        .then(({ data }) => {
+          this.perPage = data.perPage
+          this.pages = data.countPage
+        })
+        .catch(error => {
+          console.log(error)
+          this.dialog = false
+        })
+      axios.get('https://ez-cash.ru/postsController.php?page=1')
+        .then(({ data }) => {
+          this.items = data
+        })
+        .catch(error => {
+          console.log(error)
+          this.dialog = false
+        })
+    },
+    changePage (page) {
+      axios.get(`https://ez-cash.ru/postsController.php?page=${page}`)
+        .then(({ data }) => {
+          this.items = data
+        })
         .catch(error => {
           console.log(error)
           this.dialog = false
