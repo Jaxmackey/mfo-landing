@@ -7,15 +7,15 @@
           v-model="sum"
           min="1000"
           max="100000"
-          thumb-label="always"
           step="1000"
           label="Сумма займа, руб."
         >
-          <template v-slot:append>
+          <template v-slot:prepend>
             <v-text-field
               v-model="sum"
               type="number"
               style="width: 60px"
+              class="slider-value"
             ></v-text-field>
           </template>
         </v-slider>
@@ -23,14 +23,14 @@
           v-model="period"
           min="1"
           max="30"
-          thumb-label="always"
           label="Срок займа, дней"
         >
-          <template v-slot:append>
+          <template v-slot:prepend>
             <v-text-field
               v-model="period"
               type="number"
               style="width: 60px"
+              class="slider-value"
             ></v-text-field>
           </template>
         </v-slider>
@@ -442,6 +442,19 @@ export default {
     min-height: 0;
   }
 
+  .slider-value.v-text-field {
+    input {
+      background: transparent;
+      border-bottom: 0;
+      padding: 0;
+      height: 46px;
+      min-width: 130px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 22px;
+    }
+  }
+
   .v-input__slot {
     margin-bottom: 0 !important;
   }
@@ -475,8 +488,9 @@ export default {
         margin-right: 0;
         margin-bottom: 50px
       }
-      .v-input__append-outer {
+      .v-input__prepend-outer {
         margin: 0;
+        min-width: 130px;
         .v-input {
           padding: 0;
           margin: 0;
