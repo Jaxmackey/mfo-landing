@@ -12,7 +12,7 @@
           <a href="/catalog" class="nav__link">Микрозаймы</a>
           <!-- <a href="/blog" class="nav__link">Блог</a> -->
         </nav>
-        <div class="social">
+        <!-- <div class="social">
           <a href="#" class="social__link">
             <svg version="1.1" id="icon-ok" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="94px" height="94px" viewBox="0 0 94 94" style="enable-background:new 0 0 94 94;" xml:space="preserve">
                 <path d="M47.051,37.59c5.247-0.017,9.426-4.23,9.407-9.489c-0.021-5.259-4.207-9.448-9.456-9.452
@@ -62,7 +62,7 @@
               C72.411,49.38,72.561,50.688,74.869,52.943z" fill="#b69453"/>
             </svg>
           </a>
-        </div>
+        </div> -->
       </div>
 
       <a href="mailTo:ezcash.official@gmail.com" class="link-mail">ezcash.official@gmail.com</a>

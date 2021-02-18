@@ -272,7 +272,7 @@ export default {
       this.orderInfo.personalData = false
     },
     sendOrder () {
-      this.$validator.validate().then(valid => {
+      this.$refs.observer.validate().then(valid => {
         if (valid) {
           axios
             .post('http://194.58.120.164:8080/', {

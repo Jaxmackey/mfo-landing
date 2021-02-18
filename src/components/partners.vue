@@ -5,21 +5,35 @@
       <form class="filter">
         <v-slider
           v-model="sum"
-          min="500"
+          min="1000"
           max="100000"
-          step="500"
-          label="Сумма займа, руб."
           thumb-label="always"
-          @change="onChangeSlider($event)"
-        />
+          step="1000"
+          label="Сумма займа, руб."
+        >
+          <template v-slot:append>
+            <v-text-field
+              v-model="sum"
+              type="number"
+              style="width: 60px"
+            ></v-text-field>
+          </template>
+        </v-slider>
         <v-slider
           v-model="period"
           min="1"
-          max="365"
-          label="Срок займа, дней"
+          max="30"
           thumb-label="always"
-          @change="onChangeSlider($event)"
-        />
+          label="Срок займа, дней"
+        >
+          <template v-slot:append>
+            <v-text-field
+              v-model="period"
+              type="number"
+              style="width: 60px"
+            ></v-text-field>
+          </template>
+        </v-slider>
         <div class="butt butt--white" @click="filterItems(); reachGoal('ClickFindBtn');"><span>Найти</span></div>
       </form>
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
@@ -105,9 +119,6 @@ export default {
     this.itemsNew = this.items
   },
   methods: {
-    onChangeSlider (event) {
-      this.itemsNew = []
-    },
     reachGoal (target) {
       this.$metrika.reachGoal(target)
     },
@@ -143,6 +154,7 @@ export default {
       this.showMore = true
     },
     filterItems () {
+      this.$vuetify.goTo('.partners__wrapper', { offset: 100 })
       this.itemsNew = this.items.filter((item) => {
         if (this.sum >= item.MinMany && this.sum <= item.MaxMany && item.MinDay <= this.period && item.MaxDay >= this.period) {
           return item
@@ -453,13 +465,23 @@ export default {
     flex-direction: column-reverse;
     align-items: inherit;
   }
-
-  .v-input {
-    margin-right: 55px;
-    @media(max-width: 767px) {
-      width: 100%;
-      margin-right: 0;
-      margin-bottom: 50px
+  .filter {
+    > .v-input {
+      margin-right: 55px;
+      display: flex;
+      flex-direction: column;
+      @media(max-width: 767px) {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 50px
+      }
+      .v-input__append-outer {
+        margin: 0;
+        .v-input {
+          padding: 0;
+          margin: 0;
+        }
+      }
     }
   }
 
