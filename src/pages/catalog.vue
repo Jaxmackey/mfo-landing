@@ -275,7 +275,7 @@ export default {
       this.$refs.observer.validate().then(valid => {
         if (valid) {
           axios
-            .post('http://194.58.120.164:8080/', {
+            .post('/emailController.php', {
               sum: parseInt(this.orderInfo.sum),
               period: this.orderInfo.period,
               firstName: this.orderInfo.firstName,
