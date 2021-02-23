@@ -54,17 +54,18 @@
 
 <script>
 export default {
+  data: () => {
+    return {
+      sum: null,
+      period: null
+    }
+  },
   methods: {
     reachGoal (target) {
       this.$metrika.reachGoal(target)
     },
     filterItems () {
-      this.$vuetify.goTo('.partners__wrapper', { offset: 100 })
-      this.itemsNew = this.items.filter((item) => {
-        if (this.sum >= item.MinMany && this.sum <= item.MaxMany && item.MinDay <= this.period && item.MaxDay >= this.period) {
-          return item
-        }
-      })
+      this.$router.push({ path: '/catalog', query: { sum: this.sum, period: this.period } })
     }
   }
 }

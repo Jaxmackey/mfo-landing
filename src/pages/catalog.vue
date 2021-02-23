@@ -164,11 +164,13 @@
                 <validation-provider
                   rules="required"
                   name="personalData"
+                  v-slot="{ errors }"
                 >
                   <v-checkbox
                     v-model="orderInfo.personalData"
                     label="Нажимая кнопку 'Отправить' Вы даёте свое согласие на обработку введенной персональной информации"
                     required
+                    :error-messages="errors"
                   ></v-checkbox>
                 </validation-provider>
               </v-row>
@@ -177,7 +179,7 @@
           <v-card-actions>
             <button
               type="submit"
-              :disabled="invalid"
+              :disabled="!orderInfo.personalData || invalid"
               class="butt butt-send-order"
               @click="sendOrder"
             >

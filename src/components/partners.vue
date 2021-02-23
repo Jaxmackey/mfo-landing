@@ -9,6 +9,7 @@
           max="100000"
           step="1000"
           label="Сумма займа, руб."
+          @change="clearFilter"
         >
           <template v-slot:prepend>
             <v-text-field
@@ -24,6 +25,7 @@
           min="1"
           max="30"
           label="Срок займа, дней"
+          @change="clearFilter"
         >
           <template v-slot:prepend>
             <v-text-field
@@ -37,7 +39,7 @@
         <div class="butt butt--white" @click="filterItems(); reachGoal('ClickFindBtn');"><span>Найти</span></div>
       </form>
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
-        <div :class="item.Choose ? 'partners__item checked' : 'partners__item'" v-for="(item, i) in itemsNew" :key="i">
+        <div :class="(chooseItems.length > 0 && item.Choose) ? 'partners__item checked' : 'partners__item'" v-for="(item, i) in itemsNew" :key="i">
           <div class="partners__logo">
             <img :src="getImgUrl(item.NameImageLogo)" alt="">
           </div>
@@ -47,11 +49,11 @@
           </div>
           <div class="partners__actions">
             <div @click="setInfo(item);">подробнее</div>
-            <div @click="setChooseItems(item);">{{ item.Choose ? 'отменить' : 'выбрать' }}</div>
+            <div @click="setChooseItems(item);">{{ chooseItems.length > 0 && item.Choose ? 'отменить' : 'выбрать' }}</div>
           </div>
         </div>
       </div>
-      <div v-else class="result-empty">По данному запросу результатов не найдено</div>
+      <div v-else class="partners__wrapper result-empty">{{ textNotFound }}</div>
     </div>
     <v-dialog
       v-model="showMore"
@@ -93,7 +95,7 @@
             </ul>
           </div>
         </div>
-        <div class="butt butt--white" @click="showMore = false; setChooseItems(moreInfo, $event);">{{ moreInfo.Choose ? 'отменить' : 'выбрать' }}</div>
+        <div class="butt butt--white" @click="showMore = false; setChooseItems(moreInfo, $event);">{{ chooseItems.length > 0 && moreInfo.Choose ? 'отменить' : 'выбрать' }}</div>
       </v-card>
     </v-dialog>
   </div>
@@ -112,11 +114,18 @@ export default {
       period: 0,
       itemsNew: [],
       showMore: false,
-      moreInfo: null
+      moreInfo: null,
+      textNotFound: 'По данному запросу результатов не найдено'
     }
   },
   mounted () {
-    this.itemsNew = this.items
+    if (this.$route.query.sum) {
+      this.sum = this.$route.query.sum
+    }
+    if (this.$route.query.period) {
+      this.period = this.$route.query.period
+    }
+    this.filterItems()
   },
   methods: {
     reachGoal (target) {
@@ -154,12 +163,21 @@ export default {
       this.showMore = true
     },
     filterItems () {
-      this.$vuetify.goTo('.partners__wrapper', { offset: 100 })
+      this.$vuetify.goTo('.partners__wrapper', { offset: 120 })
       this.itemsNew = this.items.filter((item) => {
         if (this.sum >= item.MinMany && this.sum <= item.MaxMany && item.MinDay <= this.period && item.MaxDay >= this.period) {
           return item
         }
       })
+      this.chooseItems = []
+    },
+    clearFilter () {
+      this.itemsNew = []
+      this.chooseItems = []
+      this.$emit('updateParent', {
+        chooseItems: []
+      })
+      this.textNotFound = 'Нажмите кнопку "Найти"'
     }
   }
 }

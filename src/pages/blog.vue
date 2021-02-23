@@ -48,6 +48,7 @@ export default {
     }
   },
   mounted () {
+    this.page = this.$route.query.page ? parseInt(this.$route.query.page) : 1
     this.setPagination()
   },
   methods: {
@@ -59,25 +60,23 @@ export default {
         })
         .catch(error => {
           console.log(error)
-          this.dialog = false
         })
-      axios.get('https://ez-cash.ru/postsController.php?page=1')
+      axios.get(`https://ez-cash.ru/postsController.php?page=${this.page}`)
         .then(({ data }) => {
           this.items = data
         })
         .catch(error => {
           console.log(error)
-          this.dialog = false
         })
     },
     changePage (page) {
       axios.get(`https://ez-cash.ru/postsController.php?page=${page}`)
         .then(({ data }) => {
+          this.$router.push({ query: { page: page } })
           this.items = data
         })
         .catch(error => {
           console.log(error)
-          this.dialog = false
         })
     }
   }
