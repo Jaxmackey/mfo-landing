@@ -41,11 +41,11 @@
       <div class="partners__wrapper" v-if="itemsNew.length > 0">
         <div :class="(chooseItems.length > 0 && item.Choose) ? 'partners__item checked' : 'partners__item'" v-for="(item, i) in itemsNew" :key="i">
           <div class="partners__logo">
-            <img :src="getImgUrl(item.NameImageLogo)" alt="">
+            <img :src="getImgUrl(item.NameImageLogo)" :alt="item.Title">
           </div>
           <div class="partners__descr">
             <div class="partners__title" v-if="item.Title">{{ item.Title }}</div>
-            <div class="partners__text" v-if="item.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+            <div class="partners__text" v-if="item.CompanyDescription">{{ item.CompanyDescription }}</div>
           </div>
           <div class="partners__actions">
             <div @click="setInfo(item);">подробнее</div>
@@ -69,7 +69,7 @@
       <v-card v-if="moreInfo">
         <div class="partners__info">
           <div class="partners__title" v-if="moreInfo.Title">{{ moreInfo.Title }}</div>
-          <div class="partners__text" v-if="moreInfo.CompanyDescription">Быстроденьги – это возможность мигом получить займ экспресс без залога, скрытых комиссий и процентов, бумажной волокиты.</div>
+          <div class="partners__text" v-if="moreInfo.CompanyDescription">{{ moreInfo.CompanyDescription }}</div>
           <div v-if="moreInfo.InfoProduct.length > 0" class="partners__block">
             <div class="partners__subtitle">Информация о продукте:</div>
             <ul class="partners__list">

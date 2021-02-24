@@ -5,9 +5,8 @@
       <div class="blog">
         <div class="title">Блог</div>
         <div class="blog__wrapper">
-          <div v-for="(item, i) in items" :key="i" :class="'blog__item' + (i === 0 || i === 3 ? ' blog__item--big' : '')">
+          <div v-for="(item, i) in items" :key="i" :class="'blog__item' + (i === 0 || i === 3 ? ' blog__item--big' : '')" @click="$router.push({ name: 'blog', params: { name: item.seoname, id: item.Id } })">
             <img :src="item.Img" alt="">
-            <div class="blog__views">{{ item.Views }}</div>
             <div class="blog__info">
               <div class="blog__title">{{ item.Title }}</div>
               <div class="blog__date">{{ new Date(item.DateAt).toLocaleDateString() }}</div>

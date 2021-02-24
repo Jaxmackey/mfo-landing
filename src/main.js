@@ -43,6 +43,14 @@ export function createRouter () {
         meta: {
           title: 'EZCASH - Блог'
         }
+      },
+      {
+        path: '/blog/:name',
+        name: 'blog',
+        component: () => import('./pages/blogSingle.vue'),
+        meta: {
+          title: 'EZCASH - Блог'
+        }
       }
       // {
       //   path: '/about',
