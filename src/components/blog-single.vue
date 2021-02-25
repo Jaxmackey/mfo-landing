@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     getImgUrl (pic) {
-      return `${pic}`
+      return require(`@/assets/images/article/${pic}`)
     }
   }
 }

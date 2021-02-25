@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 Vue.use(VueYandexMetrika, {
   id: 71367445,
   scriptSrc: 'https://mc.yandex.ru/metrika/tag.js',
-  // env: 'production',
+  env: 'production',
   options: {
     clickmap: true,
     trackLinks: true,

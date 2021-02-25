@@ -6,7 +6,7 @@
         <h2>Блог</h2>
         <div class="blog__wrapper">
           <div v-for="(item, i) in items" :key="i" :class="'blog__item' + (i === 0 || i === 3 ? ' blog__item--big' : '')" @click="$router.push({ name: 'blog', params: { name: item.seoname, id: item.Id } })">
-            <img :src="item.Img" alt="">
+            <img :src="getImgUrl(item.Img)" :alt="item.Title">
             <div class="blog__info">
               <div class="blog__title">{{ item.Title }}</div>
               <div class="blog__date">{{ new Date(item.DateAt).toLocaleDateString() }}</div>
@@ -51,6 +51,9 @@ export default {
     this.setPagination()
   },
   methods: {
+    getImgUrl (pic) {
+      return require(`@/assets/images/article/${pic}`)
+    },
     setPagination () {
       axios.get('https://ez-cash.ru/paginationController.php')
         .then(({ data }) => {
