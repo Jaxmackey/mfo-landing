@@ -163,7 +163,6 @@ export default {
       this.showMore = true
     },
     filterItems () {
-      this.$vuetify.goTo('.partners__wrapper', { offset: 120 })
       this.itemsNew = this.items.filter((item) => {
         if (this.sum >= item.MinMany && this.sum <= item.MaxMany && item.MinDay <= this.period && item.MaxDay >= this.period) {
           return item

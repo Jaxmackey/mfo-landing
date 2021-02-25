@@ -29,4 +29,17 @@ export default {
 
 <style lang="scss" scoped>
 
+::v-deep {
+  .v-pagination.v-pagination {
+    background: red;
+
+    li {
+      button {
+        background: red !important;
+      }
+
+    }
+  }
+}
+
 </style>
