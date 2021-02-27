@@ -101,6 +101,22 @@ body {
       font-size: 22px;
       line-height: 31px;
     }
+
+    &.h1-black {
+      color: #303030;
+      padding-top: 40px;
+      text-transform: none;
+      line-height: 58px;
+      font-family: "Montserrat", sans-serif;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+
+      @media (max-width: 767px) {
+        font-size: 36px;
+        line-height: 42px;
+      }
+    }
   }
 
   h2 {

@@ -14,6 +14,10 @@ export default {}
 <style lang="scss" scoped>
   .breadcrumbs {
     margin: 45px 0 60px;
+
+    @media(max-width: 767px) {
+      margin: 30px 0;
+    }
   }
 
   .breadcrumbs__link {

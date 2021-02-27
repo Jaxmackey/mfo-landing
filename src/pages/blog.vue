@@ -136,7 +136,7 @@ export default {
     min-height: 600px;
 
     @media(max-width: 767px) {
-      min-height: 400px;
+      min-height: 370px;
     }
 
     .blog__views {
@@ -147,25 +147,29 @@ export default {
         top: 25px;
         right: 25px;
         bottom: auto;
+        font-size: 19px;
+        line-height: 23px;
       }
+
     }
 
     .blog__title {
-      font-size: 56px;
-      line-height: 68px;
+      font-size: 46px;
+      line-height: 50px;
 
       @media(max-width: 767px) {
-        font-size: 40px;
-        line-height: 42px;
+        font-size: 28px;
+        line-height: 32px;
+        max-width: 290px;
       }
     }
 
     .blog__info {
       max-width: 490px;
-      max-height: 68px;
+      max-height: 100px;
 
       @media(max-width: 767px) {
-        max-height: 136px;
+        max-height: 96px;
       }
     }
 
@@ -205,18 +209,19 @@ export default {
   width: 100%;
   max-width: 290px;
   transition: .5s;
-  max-height: 88px;
+  max-height: 96px;
   overflow: hidden;
 }
 
 .blog__title {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  font-size: 36px;
-  line-height: 44px;
+  font-size: 28px;
+  line-height: 32px;
   color: #FFFFFF;
   width: 100%;
   margin-bottom: 20px;
+  min-height: 96px;
 }
 
 .blog__views {
@@ -269,8 +274,52 @@ export default {
 
 ::v-deep {
   .v-pagination__navigation {
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .mdi-chevron-left::before {
+    content: '';
+    background: url("../assets/arrow-prev.svg") no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 28px;
+  }
+
+  .mdi-chevron-right::before {
+    content: '';
+    background: url("../assets/arrow-next.svg") no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 28px;
+  }
+
+  .v-pagination.v-pagination {
+    padding: 50px 0;
+
+    button {
+      outline: 0 !important;
+    }
+  }
+
+  .theme--light.v-pagination .v-pagination__item {
     border-radius: 0;
-    box-shadow: 0;
+    box-shadow: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 22px;
+    margin: 0 10px;
+    min-width: auto;
+
+    @media(max-width: 767px) {
+      margin: 0 8px;
+      font-size: 18px;
+    }
+
+    &--active.primary {
+      background-color: transparent !important;
+      color: #b69453;
+    }
   }
 }
 </style>

@@ -32,12 +32,6 @@ export default {
 ::v-deep {
   .v-pagination.v-pagination {
     background: red;
-
-    li {
-      button {
-        background: red !important;
-      }
-
     }
   }
 }
