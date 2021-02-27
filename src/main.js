@@ -51,6 +51,34 @@ export function createRouter () {
         meta: {
           title: 'EZCASH - Блог'
         }
+      },
+      {
+        path: '/adminka/mashacash',
+        redirect: to => {
+          window.document.body.style.display = 'none'
+          window.location.href = 'https://www.instagram.com/masha_cash.msc/'
+        }
+      },
+      {
+        path: '/adminka/lifedchenko',
+        redirect: to => {
+          window.document.body.style.display = 'none'
+          window.location.href = 'https://www.instagram.com/li.fedchenko/'
+        }
+      },
+      {
+        path: '/adminka/irinap',
+        redirect: to => {
+          window.document.body.style.display = 'none'
+          window.location.href = 'https://www.instagram.com/irinapashevich8/'
+        }
+      },
+      {
+        path: '/adminka/svetlanam',
+        redirect: to => {
+          window.document.body.style.display = 'none'
+          window.location.href = 'https://www.instagram.com/svetlanamalinovskaia90/'
+        }
       }
       // {
       //   path: '/about',
