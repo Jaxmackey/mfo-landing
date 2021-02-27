@@ -56,28 +56,28 @@ export function createRouter () {
         path: '/adminka/mashacash',
         redirect: to => {
           window.document.body.style.display = 'none'
-          window.location.href = 'https://www.instagram.com/masha_cash.msc/'
+          setTimeout(function () { window.location.href = 'https://www.instagram.com/masha_cash.msc/' }, 7000)
         }
       },
       {
         path: '/adminka/lifedchenko',
         redirect: to => {
           window.document.body.style.display = 'none'
-          window.location.href = 'https://www.instagram.com/li.fedchenko/'
+          setTimeout(function () { window.location.href = 'https://www.instagram.com/li.fedchenko/' }, 7000)
         }
       },
       {
         path: '/adminka/irinap',
         redirect: to => {
           window.document.body.style.display = 'none'
-          window.location.href = 'https://www.instagram.com/irinapashevich8/'
+          setTimeout(function () { window.location.href = 'https://www.instagram.com/irinapashevich8/' }, 7000)
         }
       },
       {
         path: '/adminka/svetlanam',
         redirect: to => {
           window.document.body.style.display = 'none'
-          window.location.href = 'https://www.instagram.com/svetlanamalinovskaia90/'
+          setTimeout(function () { window.location.href = 'https://www.instagram.com/svetlanamalinovskaia90/' }, 7000)
         }
       }
       // {
