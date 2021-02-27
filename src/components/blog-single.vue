@@ -10,18 +10,29 @@
 </template>
 
 <script>
-import Breadcrumbs from '@/components/breadcrumbs'
-
+import axios from 'axios'
 export default {
-  components: {
-    Breadcrumbs
-  },
   props: {
     itemInfo: null
   },
   methods: {
     getImgUrl (pic) {
       return require(`@/assets/images/article/${pic}`)
+    },
+    getInfo () {
+      axios
+        .get(`https://ez-cash.ru/fullPostRoutController.php?name=${this.$route.params.name}`)
+        .then(({ data }) => {
+          this.itemInfo = data[0]
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  },
+  mounted () {
+    if (this.itemInfo === null) {
+      this.getInfo()
     }
   }
 }
