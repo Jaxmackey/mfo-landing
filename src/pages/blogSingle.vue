@@ -38,6 +38,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .blog-img {
   border-radius: 50px;
