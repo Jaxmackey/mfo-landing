@@ -5,37 +5,37 @@
       <div class="advantages__wrapper">
         <div class="advantages__item">
           <div class="advantages__icon">
-            <img src="../assets/adv-1.svg" alt="">
+            <img src="../assets/images/adv-1.svg" alt="">
           </div>
           <div class="advantages__text">студенты</div>
         </div>
         <div class="advantages__item">
           <div class="advantages__icon">
-            <img src="../assets/adv-2.svg" alt="">
+            <img src="../assets/images/adv-2.svg" alt="">
           </div>
           <div class="advantages__text">БЕЗ ОФИЦИАЛЬНОГО МЕСТА РАБОТЫ</div>
         </div>
         <div class="advantages__item">
           <div class="advantages__icon">
-            <img src="../assets/adv-3.svg" alt="">
+            <img src="../assets/images/adv-3.svg" alt="">
           </div>
           <div class="advantages__text">ИМЕЮЩИМ СУДИМОСТИ</div>
         </div>
         <div class="advantages__item">
           <div class="advantages__icon">
-            <img src="../assets/adv-4.svg" alt="">
+            <img src="../assets/images/adv-4.svg" alt="">
           </div>
           <div class="advantages__text">ПЕНСИОНЕРАМ</div>
         </div>
         <div class="advantages__item">
           <div class="advantages__icon">
-            <img src="../assets/adv-5.svg" alt="">
+            <img src="../assets/images/adv-5.svg" alt="">
           </div>
           <div class="advantages__text">С ПЛОХОЙ КРЕДИТНОЙ ИСТОРИЕЙ</div>
         </div>
         <div class="advantages__item">
           <div class="advantages__icon">
-            <img src="../assets/adv-6.svg" alt="">
+            <img src="../assets/images/adv-6.svg" alt="">
           </div>
           <div class="advantages__text">НАХОДЯЩИМСЯ В ДЕКРЕТЕ</div>
         </div>

@@ -76,16 +76,18 @@ export default {
   background: url("../assets/offer.png") no-repeat;
   background-size: cover;
   background-position: center;
+  min-height: calc(100vh - 100px);
+  @media(max-width: 1259px) {
+    min-height: calc(100vh - 80px);
+  }
 
   .container {
     flex-direction: row;
     align-items: flex-start;
-    min-height: calc(100vh - 100px);
     padding-top: 20vh;
 
     @media(max-width: 1259px) {
       padding-top: 40px;
-      min-height: calc(100vh - 80px);
     }
     @media(max-width: 1199px) {
       flex-direction: column;
