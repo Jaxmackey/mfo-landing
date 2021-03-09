@@ -307,6 +307,10 @@ export default {
         }
       })
     }
+  },
+  metaInfo: {
+    title: 'EZCASH - Микрозаймы',
+    description: 'Компания EZCASH сотрудничает с такими известными компаниями как Mishka Money, Доброзайм, Слава Займ, Kometa Zaim, и др.'
   }
 }
 </script>

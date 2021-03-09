@@ -2,9 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
+import VueMeta from 'vue-meta'
 import VueYandexMetrika from 'vue-yandex-metrika'
 
 Vue.use(VueRouter)
+Vue.use(VueMeta)
 Vue.use(VueYandexMetrika, {
   id: 71367445,
   scriptSrc: 'https://mc.yandex.ru/metrika/tag.js',
@@ -25,24 +27,19 @@ export function createRouter () {
     routes: [
       {
         path: '/',
-        component: () => import('./pages/index.vue'),
-        meta: {
-          title: 'EZCASH - Главная'
-        }
+        component: () => import('./pages/index.vue')
       },
       {
         path: '/catalog',
         component: () => import('./pages/catalog.vue'),
         meta: {
-          title: 'EZCASH - Микрозаймы'
+          title: 'EZCASH - Микрозаймы',
+          description: 'Компания EZCASH сотрудничает с такими известными компаниями как Mishka Money, Доброзайм, Слава Займ, Kometa Zaim, и др.'
         }
       },
       {
         path: '/blog',
-        component: () => import('./pages/blog.vue'),
-        meta: {
-          title: 'EZCASH - Блог'
-        }
+        component: () => import('./pages/blog.vue')
       },
       {
         path: '/blog/:name',

@@ -1,6 +1,12 @@
 <template>
   <v-app id="app">
-    <main class="wrapper">
+    <div class="preloader_wrap" v-if="loading">
+      <v-progress-circular
+        indeterminate
+        color="primary"
+      />
+    </div>
+    <main class="wrapper" v-else>
       <Header />
       <router-view />
     </main>
@@ -14,6 +20,16 @@ export default {
   name: 'App',
   components: {
     Header
+  },
+  data: () => {
+    return {
+      loading: true
+    }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.loading = false
+    }, 500)
   }
 }
 </script>
@@ -69,5 +85,15 @@ body {
       padding-top: 80px;
     }
   }
+}
+.preloader_wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
