@@ -1,9 +1,9 @@
 {
-  "name": "mfo_project",
+  "name": "ezcash",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -12,9 +12,12 @@
     "core-js": "^3.6.5",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
+    "vue-meta": "^2.4.0",
+    "vue-router": "^3.5.1",
     "vue-yandex-metrika": "^1.8.3",
     "vuelidate": "^0.7.6",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.2.11",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
