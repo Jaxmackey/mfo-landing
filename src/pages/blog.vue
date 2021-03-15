@@ -12,18 +12,23 @@
               <div class="blog__date">{{ new Date(item.DateAt).toLocaleDateString() }}</div>
               <div class="blog__preview">{{ item.MinText }}</div>
             </div>
-            <a v-bind:href="'/blog/' + item.seoname"></a>
+            <a :href="'/blog/' + item.seoname"></a>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
-      <v-pagination
+      <!-- <v-pagination
         v-model="page"
         :length="pages"
         :total-visible="7"
         @input="changePage(page)"
-      ></v-pagination>
+      ></v-pagination> -->
+      <ul class="pagination">
+        <li v-for="(pageNum, pageIndex) in pages" :key="pageIndex" @click="changePage(pageNum)" :class="{ active: pageNum === page}">
+          <a :href="`/blog?page=${pageNum}`">{{ pageNum }}</a>
+        </li>
+      </ul>
     </div>
     <Footer />
   </div>
@@ -77,6 +82,7 @@ export default {
         .then(({ data }) => {
           this.$router.push({ query: { page: page } })
           this.items = data
+          this.page = page
         })
         .catch(error => {
           console.log(error)
@@ -272,5 +278,32 @@ export default {
     font-size: 14px;
     line-height: 16px;
     padding-bottom: 6px;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    a {
+      border-radius: 4px;
+      height: 34px;
+      margin: 0 5px;
+      min-width: 34px;
+      padding: 0 5px;
+      text-decoration: none;
+      transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
+      width: auto;
+      box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .active a {
+      background-color: #b69453;
+      border-color: #b69453;
+      box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+      color: #fff;
+    }
   }
 </style>
