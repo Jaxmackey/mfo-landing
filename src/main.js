@@ -34,6 +34,10 @@ export function createRouter () {
         component: () => import('./pages/catalog.vue')
       },
       {
+        path: '/catalog-test',
+        component: () => import('./pages/partnerSingle.vue')
+      },
+      {
         path: '/blog',
         component: () => import('./pages/blog.vue')
       },
